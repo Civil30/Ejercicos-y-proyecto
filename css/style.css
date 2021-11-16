@@ -46,10 +46,7 @@ p {
     font-size: 3rem;
 }
 
-section p{
-    font-size: 2rem;
-    text-shadow: rgb(255, 255, 255);
-}
+
 
 /* img {
     display: block;
@@ -88,5 +85,7 @@ button:hover {
     font-family: Arial, Helvetica, sans-serif;
     padding: 1rem;
 }
-
-
+.card {
+    color: bisque;
+    text-transform: uppercase;
+}
