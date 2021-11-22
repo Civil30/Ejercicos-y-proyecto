@@ -1,8 +1,23 @@
-const vecinos = [];
-const pisos = [1, 2, 3, 4, 5, 6];
-const letras = ["A", "B", "C", "D"];
+const titulo = document.querySelector("#titulo");
 
+titulo.onmouseover = cambio;
+titulo.onmouseout = volver;
 
+function cambio() {
+    titulo.textContent = "Bienvenid@ a la plataforma";
+};
+function volver(){
+    titulo.textContent = "Curso JavaScript"
+}
+
+const pisos = [1, 2, 3, 4, 5];
+const letras = ["A", "B", "C", "D", "E"];
+let vecinos = JSON.parse(localStorage.getItem("data"));
+
+if (!vecinos) {
+    vecinos = [] 
+};
+ 
 
 const html = {
     id : document.querySelector("#formulario"),
@@ -18,7 +33,7 @@ const html = {
 };
 
 
-class vecino {
+class Vecino {
     constructor (id, pisoN, pisoL, nombre, apellido, pago, fecha){
         this.id = id;
         this.pisoN = pisoN;
@@ -30,40 +45,21 @@ class vecino {
     }
 };
 
-
-
-for (let i = 0; i < pisos.length; i += 1) {
+for (const piso of pisos) {
     const option = document.createElement("OPTION");
-    option.textContent = pisos[i]
+    option.textContent = piso
     html.inputPisoN.appendChild(option)
-    // html.inputPisoN.innerHTML += `<option>${pisos[i]}</option>`    
-}
-for (let i = 0; i < letras.length; i += 1) {
-    // const option = document.createElement("OPTION");
-    // option.textContent = letras[i]
-    // html.inputPisoL.appendChild(option)
-    html.inputPisoL.innerHTML += `<option>${letras[i]}</option>`    
-}
-
-
+};
+for (const letra of letras) {
+    html.inputPisoL.innerHTML += `<option>${letra}</option>`    
+};
 
 html.btnCrear.addEventListener("click", crear);
 html.btnMostrar.addEventListener("click", mostrarInquilinos);
 
 
-
-function vecinosAdd(id, pisoN, pisoL, nombre, apellido, pago, fecha) {
-    vecinos.push(new vecino (id, pisoN, pisoL, nombre, apellido, pago, fecha));
-};
-
-vecinosAdd(1, 1, "A", "Marta", "Juarez", true, "01/08/2020");
-vecinosAdd(2, 1, "B", "Joaquin", "Gomez", true, "22/05/2021");
-vecinosAdd(3, 2, "A", "JORGE", "RAMOS", false, "08/12/2020");
-vecinosAdd(4, 2, "B", "oscar", "diaz", true, "01/02/2019");
-vecinosAdd(5, 3, "B", "Carla", "Pirinch", false, "07/10/2021");
-
 function crear (evt) {
-    evt.preventDefault();    
+    // evt.preventDefault();    
     const id = vecinos.length + 1;
     const nombre = html.inputNombre.value;
     const apellido = html.inputApellido.value;
@@ -72,25 +68,23 @@ function crear (evt) {
     const pago = html.inputPago.checked;
     const fecha = html.inputFecha.value;
 
-    vecinosAdd(id, pisoN, pisoL, nombre, apellido, pago, fecha)
+    vecinosAdd = new Vecino(id, pisoN, pisoL, nombre, apellido, pago, fecha);
+    vecinos.push(vecinosAdd)
 
-    console.log(vecinos);
-}
+    localStorage.setItem("data", JSON.stringify(vecinos));
+};
 
 function mostrarInquilinos() {
     
-    vecinos.forEach(persona => {
+    html.inquilinos.innerHTML=" ";
+
+    vecinos.forEach( persona => {
         const div = document.createElement("DIV");
-        div.classList.add("card")
-        div.innerHTML = `Nombre: ${persona.nombre} ${persona.apellido},  Piso: ${persona.pisoN + persona.pisoL}`
+        div.classList.add("card");
+        div.innerHTML = `<p> Nombre: ${persona.nombre} ${persona.apellido},  Piso: ${persona.pisoN + persona.pisoL} <p>`;
         html.inquilinos.appendChild(div)
     })
-
-}
-
-
-
-
-
+       
+};
 
 

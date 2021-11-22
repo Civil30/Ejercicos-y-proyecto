@@ -6,32 +6,28 @@ html {
     box-sizing: inherit;
 }
 body {
-	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-	background-size: 400% 400%;
-	animation: gradient 15s ease infinite;
-	height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    /* background-image: url(../img/hotel.png);
+    background-size: 100vh; */
+	background-color: bisque;
     font-size: 1.6rem;
+    background-repeat: no-repeat;
+    /* display: flex; */
     
 }
 
-@keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
-}
 
-h1, h2, p, a, button {
-    font-family: 'Bebas Neue', cursive;
+h1, h2, p, a, #crear, #formulario, #mostrar{
+    /* font-family: 'Bebas Neue', cursive; */
     text-align: center;
     line-height:1.2;
-    color: bisque;
+    color: rgb(0, 0, 0);
 }
+#crear, #formulario, #mostrar{
+    color: black;
+}
+
 
 h1 {
     font-size: 6rem;
@@ -43,18 +39,11 @@ a {
     font-size: 1.4rem;
 }
 p {
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 
-
-/* img {
-    display: block;
-    margin: auto;
-} */
-
-/* button {
-    background-color: transparent;
+#crear, #mostrar {
     border-bottom: groove;
     border-color: grey;
     padding: 1rem 3rem;
@@ -65,27 +54,61 @@ p {
     text-align: center;
     cursor: pointer;
     display: block;
-    margin: 3rem auto;
+    margin: auto;
     transition: transform 0.3s ease;       
 }
 button:hover {
     transform: scale(1.1);
 } */
 
-
 .contenido {
     max-width: 1200px;
     margin: 5rem auto 0 auto;
-    font-size: 3rem;
-    
-    
+    font-size: 3rem;   
+    width: 50%;
+    align-items: center;
+    justify-content: center;
 }
 
 .hashtag {
-    font-family: Arial, Helvetica, sans-serif;
     padding: 1rem;
 }
 .card {
     color: bisque;
     text-transform: uppercase;
+}
+@media (min-width: 900px){
+    #formulario {
+        /* background-color: rgba(255, 255, 255, 0.26); */
+        margin: 10rem;
+        padding: 10rem;
+        text-align: left;
+        display: flex;
+        margin-bottom: 2rem;
+        gap: 2rem;
+        /* border-radius: 2rem; */
+        /* border: thin solid black; */
+        padding: 1rem; 
+    }
+}
+
+.hotel__img {
+    max-width: 100vh;
+    margin: 0 auto;
+    display: block;
+    
+}
+
+.ventana {
+    background-color: tomato;
+    width: 2rem;
+    height: 2rem;
+}
+
+.ventanas {
+    display: grid;
+    width: 50rem;
+    margin: 0 auto;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
 }

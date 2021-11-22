@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,52 +10,55 @@
 </head>
 <body>
     <div class="contenido">
-        <h1>Curso JavaScript</h1>
-        <h2>Proyecto Final y Ejercicios</h2>
-        <p class="hashtag">#ProyectoJS</p>
+        <div>
+            <h1 id="titulo">Curso JavaScript</h1>
+            <h2>Proyecto Final</h2>
+            <p class="hashtag">#ProyectoJS</p>
+        </div>
+        <div id="div-form">
+            <form id="formulario">
+                <div>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" id="nombre" placeholder="Ingresar Nombre"/>
+                </div>
+                <div>
+                    <label for="apellido">Apellido</label>
+                    <input type="text" name="apellido" id="apellido" placeholder="Ingresar Apellido"/>
+                </div>
+                <div>
+                    <label for="pisoN">Piso N°</label>
+                    <select id="pisoN">
+                    </select>                
+                </div>
+                <div>
+                    <label for="pisoL">Piso letra</label>
+                    <select id="pisoL">
+                    </select>                
+                </div>
+                <div>
+                    <label for="fecha">Fecha</label>
+                    <input type="date" id="fecha">
+                </div>
+                <div>
+                    <label for="pago">Pago</label>
+                    <input type="checkbox" id="pago">
+                </div>
+                <div>
+                    <input type ="submit" id="crear" value="Crear"> 
+
+                </div>
+                <div>
+                    <input type ="button" id="mostrar" value="Mostrar"> 
+
+                </div>
+            </form>
+        </div>
     </div>
-    <div id="div-form">
-        <form id="formulario">
-            <div>
-                <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" id="nombre" placeholder="Ingresar Nombre"/>
-            </div>
-            <div>
-                <label for="apellido">Apellido</label>
-                <input type="text" name="apellido" id="apellido" placeholder="Ingresar Apellido"/>
-            </div>
-            <div>
-                <label for="pisoN">Piso N°</label>
-                <select id="pisoN">
-                </select>                
-            </div>
-            <div>
-                <label for="pisoL">Piso letra</label>
-                <select id="pisoL">
-                </select>                
-            </div>
-            <div>
-                <label for="fecha">Fecha</label>
-                <input type="date" id="fecha">
-            </div>
-            <div>
-                <label for="pago">Pago</label>
-                <input type="checkbox" id="pago">
-            </div>
-            <div>
-                <input type ="submit" id="crear" value="Crear"> 
-
-            </div>
-            <div>
-                <input type ="button" id="mostrar" value="Mostrar Inquilinos"> 
-
-            </div>
-        </form>
-    </div>
-
+    
     <div class="contenido inquilinos">
-
+    
     </div>
+    
 
 
     <script src="./js/main.js"></script>
