@@ -9,7 +9,7 @@ if (!vecinos) {
 
 const html = {
     //Menú de navegación
-    menu : $("#menu"),
+    menu : document.querySelector("#menu"),
     btnHome : document.querySelector("#btn-home"),
     btnForm : document.querySelector("#btn-form"),
     btnHotel : document.querySelector("#btn-hotel"),
