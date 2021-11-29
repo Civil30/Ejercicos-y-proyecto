@@ -1,66 +1,173 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
+
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"> -->
     <title>Introducción JavaScript</title>
 </head>
+
 <body>
-    <div class="contenido">
-        <div>
-            <h1 id="titulo">Curso JavaScript</h1>
-            <h2>Proyecto Final</h2>
-            <p class="hashtag">#ProyectoJS</p>
+
+    <nav id="menu">
+        <button id="btn-form">Formulario</button>
+        <button id="btn-hotel">Hotel</button>
+    </nav>
+
+    <!-- <div class="contenido w-50"> -->
+
+
+        <div class="formularioDisplay">
+
+            <div class="wrapper">
+                <div class="inner">
+                    <div class="image-holder">
+                        <img class="img-lateral" src="img/example-8.png" alt="image">
+                    </div>
+                    <form id="formulario" action="">
+                        <h3>Formulario de Registro</h3>
+                        
+                        <div class="grid-2">
+                            <input id="nombre" type="text" placeholder="Nombre" class="form-control">
+                            <input id="apellido" type="text" placeholder="Apellido" class="form-control">
+                        </div>
+
+                        <div class="grid-2">
+                            <div class="grid-2">
+                                <select id="pisoN" class="form-control">
+                                    <option value="" selected disabled>Piso</option>
+                                </select>
+                                <select id="pisoL" class="form-control">
+                                    <option value="" selected disabled>Dpto</option>
+                                </select>
+                            </div>
+                            <input id="numTel" type="number" min="0" placeholder="Teléfono" class="form-control">
+                        </div>
+
+                        <div class="grid-2">
+                            <input id="fecha" type="date" placeholder="Fecha" class="fecha form-control" required>
+                            <input id="dias" type="number" min="0" placeholder="Días" class="form-control">
+                        </div>
+
+                        <div class="grid-2">
+                            <input id="fechaFin" type="date" placeholder="Fecha" class="form-control" disabled required>
+                            
+                        </div>
+
+                        <button id="btnRegistro" type="submit" class="form__btn">Registrar</button>
+                    </form>
+                </div>
+                
+            </div>
+        
+            <div class="contenido inquilinos">
+
+            </div>
+
         </div>
-        <div id="div-form">
-            <form id="formulario">
-                <div>
+
+            <!-- <h2>Formulario de registro</h2>
+
+            <form class="formulario" id="formulario">
+                <div class="campo">
                     <label for="nombre">Nombre</label>
-                    <input type="text" name="nombre" id="nombre" placeholder="Ingresar Nombre"/>
+                    <input type="text" name="nombre" id="nombre" placeholder="Ingresar Nombre" />
                 </div>
-                <div>
+                <div class="campo">
                     <label for="apellido">Apellido</label>
-                    <input type="text" name="apellido" id="apellido" placeholder="Ingresar Apellido"/>
+                    <input type="text" name="apellido" id="apellido" placeholder="Ingresar Apellido" />
                 </div>
-                <div>
-                    <label for="pisoN">Piso N°</label>
+                <div class="campo">
+                    <label for="pisoN">Piso</label>
                     <select id="pisoN">
-                    </select>                
-                </div>
-                <div>
-                    <label for="pisoL">Piso letra</label>
+                    </select>
                     <select id="pisoL">
-                    </select>                
+                    </select>
                 </div>
-                <div>
+                <div class="campo">
+                    <label for="pisoL">Piso letra</label>
+                </div>
+                <div class="campo">
                     <label for="fecha">Fecha</label>
                     <input type="date" id="fecha">
                 </div>
-                <div>
+                <div class="campo">
                     <label for="pago">Pago</label>
                     <input type="checkbox" id="pago">
                 </div>
                 <div>
-                    <input type ="submit" id="crear" value="Crear"> 
+                    <input type="submit" id="crear" value="Crear">
 
                 </div>
                 <div>
-                    <input type ="button" id="mostrar" value="Mostrar"> 
+                    <input type="button" id="mostrar" value="Mostrar">
 
                 </div>
-            </form>
+            </form> -->
+
+        
+    <!-- </div> -->
+
+
+    
+
+    <div class="hotel">
+
+        <div class="ventanas">
+            <button id="5E" class="ventana"></button>
+            <button id="5D" class="ventana"></button>
+            <button id="5C" class="ventana"></button>
+            <button id="5B" class="ventana"></button>
+            <button id="5A" class="ventana"></button>
+            <button id="4E" class="ventana"></button>
+            <button id="4D" class="ventana"></button>
+            <button id="4C" class="ventana"></button>
+            <button id="4B" class="ventana"></button>
+            <button id="4A" class="ventana"></button>
+            <button id="3E" class="ventana"></button>
+            <button id="3D" class="ventana"></button>
+            <button id="3C" class="ventana"></button>
+            <button id="3B" class="ventana"></button>
+            <button id="3A" class="ventana"></button>
+            <button id="2E" class="ventana"></button>
+            <button id="2D" class="ventana"></button>
+            <button id="2C" class="ventana"></button>
+            <button id="2B" class="ventana"></button>
+            <button id="2A" class="ventana"></button>
+            <button id="1E" class="ventana"></button>
+            <button id="1D" class="ventana"></button>
+            <button id="1C" class="ventana"></button>
+            <button id="1B" class="ventana"></button>
+            <button id="1A" class="ventana"></button>
         </div>
     </div>
-    
-    <div class="contenido inquilinos">
-    
-    </div>
-    
 
 
+    <!-- <div class="contenedor-card">
+        <div class="card">
+            <h3>Piso y Dpto</h3>
+            <img src="" alt="">
+            <ul>
+                <li>Nombre y Apellido</li>
+                <li>Telefono</li>
+                <li>Piso y Dpto</li>
+                <li>Pago</li>
+                <li>Fecha de Ingreso</li>
+                <li>Vencimiento</li>
+            </ul>
+        </div>
+    </div> -->
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="./js/modernizr.js"></script>
     <script src="./js/main.js"></script>
+
 </body>
+
 </html>

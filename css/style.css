@@ -8,42 +8,183 @@ html {
 body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
-    /* background-image: url(../img/hotel.png);
-    background-size: 100vh; */
-	background-color: bisque;
-    font-size: 1.6rem;
     background-repeat: no-repeat;
-    /* display: flex; */
-    
+    /* background-position: center center; */
+	background-color: #BEAEE2;
+    font-size: 1.6rem;
+
 }
 
 
-h1, h2, p, a, #crear, #formulario, #mostrar{
-    /* font-family: 'Bebas Neue', cursive; */
-    text-align: center;
-    line-height:1.2;
-    color: rgb(0, 0, 0);
-}
-#crear, #formulario, #mostrar{
+
+/* #crear, #formulario, #mostrar{
     color: black;
+} */
+
+
+/*********** FORMULARIO **************/
+input, select, .form__btn {
+    font-family: arial;
+    color: #333;
+    font-size: 14px; }
+   
+p, h1, h2, h3, h4, h5, h6 {
+    margin: 0; 
+}
+   
+.img-lateral {
+    max-width: 100%;
+}
+
+   
+a:hover {
+    text-decoration: none;
+}
+   
+:focus {
+    outline: none; 
+}
+   
+.wrapper {
+    min-height: 100vh;
+    /* background-size: cover; */
+    /* background-repeat: no-repeat; */
+    display: flex;
+    align-items: center; 
+} 
+.inner {
+    padding: 20px;
+    background: #fff;
+    max-width: 850px;
+    margin: auto;
+    display: flex;
+}
+.inner .image-holder {
+    width: 50%; 
+}
+.inner form {
+    width: 50%;
+    padding-top: 36px;
+    padding-left: 45px;
+    padding-right: 45px; 
+}
+.inner h3 {
+    text-transform: uppercase;
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 28px;
+}
+   
+.form-group {
+    display: flex;
+    column-gap: 2.5rem;
+    justify-content: center;
+    flex: 1 1 auto;
+}
+.form-group input {
+    flex: 1 1 auto;
+}
+.grid-2 .fecha{
+    text-align: center;
+}
+.grid-2 input:disabled {
+    background-color: rgba(51, 51, 51, .4);
+    border-radius: 5px;
+    text-align: center;
+}
+   
+.form-wrapper {
+    position: relative; 
+}
+.form-wrapper i {
+    position: absolute;
+    bottom: 9px;
+    right: 0;
+}
+   
+.form-control {
+    border: 1px solid #333;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    display: block;
+    /* width: 25%; */
+    height: 30px;
+    padding: 0;
+    margin-bottom: 25px;
+    /* margin-right: 25px; */
+ 
 }
 
 
-h1 {
-    font-size: 6rem;
-}
-h2 {
-    font-size: 4rem;
-}
-a {
-    font-size: 1.4rem;
-}
-p {
-    font-size: 2rem;
+.form-control::-webkit-input-placeholder {
+    font-size: 14px;
+    color: gray;
+    font-family: arial;
 }
 
+     
+select {
+    font-size: 14px;
+    font-family: arial;
+    cursor: pointer;
+    color: gray;
+    background-color: transparent;
+    flex-basis: 100%;
+}
 
-#crear, #mostrar {
+select option[value=""][disabled] {
+    display: none;
+}
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 2.5rem;
+}
+   
+.form__btn {
+    border: none;
+    width: 164px;
+    height: 51px;
+    margin: auto;
+    margin-top: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: #333;
+    font-size: 15px;
+    color: #fff;
+}
+.form__btn:hover{
+    background: #7267CB;
+}
+   
+@media (max-width: 767px) {
+    .inner {
+      display: block;
+    }
+    .inner .image-holder {
+        width: 100%; 
+    }
+    .inner form {
+        width: 100%;
+        padding: 40px 0 30px; 
+    }
+    .img-lateral {
+        max-width: 100%
+        
+    }
+}
+   
+.form__btn {
+    margin-top: 60px; 
+}
+/*********** FORMULARIO FIN **************/
+
+
+/* #crear, #mostrar {
     border-bottom: groove;
     border-color: grey;
     padding: 1rem 3rem;
@@ -56,59 +197,78 @@ p {
     display: block;
     margin: auto;
     transition: transform 0.3s ease;       
-}
+} */
 button:hover {
     transform: scale(1.1);
-} */
+}
 
 .contenido {
     max-width: 1200px;
-    margin: 5rem auto 0 auto;
-    font-size: 3rem;   
-    width: 50%;
-    align-items: center;
-    justify-content: center;
+    margin: 0 auto;
 }
 
-.hashtag {
-    padding: 1rem;
-}
 .card {
     color: bisque;
     text-transform: uppercase;
 }
-@media (min-width: 900px){
-    #formulario {
-        /* background-color: rgba(255, 255, 255, 0.26); */
-        margin: 10rem;
-        padding: 10rem;
-        text-align: left;
-        display: flex;
-        margin-bottom: 2rem;
-        gap: 2rem;
-        /* border-radius: 2rem; */
-        /* border: thin solid black; */
-        padding: 1rem; 
-    }
+
+.hotel {
+    display: none;
+    height: 92rem;
+    background-image: url(../img/hotel.png);
+    background-size: auto 96rem;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
-.hotel__img {
-    max-width: 100vh;
-    margin: 0 auto;
-    display: block;
+.home {
+    display: none;
+}
+/* .form {
     
+    padding: 1rem;
+    width: 90%;
+    margin: 0 auto;
+}
+.form h2 {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0;
+}
+.formulario {
+    background-color: coral;
+}
+.campo input{
+    width: 50%;
+} */
+
+
+.ventanas {
+    padding-top: 23rem;
+    display: grid;
+    width: 32.8rem;
+    margin: 0 auto;
+    grid-template-columns: repeat(5, 1fr);
+    row-gap: 4.1rem;
+    column-gap: 2rem;
 }
 
 .ventana {
-    background-color: tomato;
-    width: 2rem;
-    height: 2rem;
+    background-color: transparent;
+    border: none;
+    width: 4rem;
+    height: 6rem;
+    cursor: pointer;
 }
 
-.ventanas {
-    display: grid;
-    width: 50rem;
-    margin: 0 auto;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-}
+/******card******/
+/* .contenedor-card {
+    width: 100%;
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 30px;
+    background-color: whitesmoke;
+    border-radius: 1rem;
+} */

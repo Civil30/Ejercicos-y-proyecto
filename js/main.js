@@ -1,15 +1,3 @@
-const titulo = document.querySelector("#titulo");
-
-titulo.onmouseover = cambio;
-titulo.onmouseout = volver;
-
-function cambio() {
-    titulo.textContent = "Bienvenid@ a la plataforma";
-};
-function volver(){
-    titulo.textContent = "Curso JavaScript"
-}
-
 const pisos = [1, 2, 3, 4, 5];
 const letras = ["A", "B", "C", "D", "E"];
 let vecinos = JSON.parse(localStorage.getItem("data"));
@@ -20,14 +8,24 @@ if (!vecinos) {
  
 
 const html = {
-    id : document.querySelector("#formulario"),
+    //Menú de navegación
+    menu : $("#menu"),
+    btnHome : document.querySelector("#btn-home"),
+    btnForm : document.querySelector("#btn-form"),
+    btnHotel : document.querySelector("#btn-hotel"),
+    formularioDisplay : document.querySelector(".formularioDisplay"),
+    hotelDisplay : document.querySelector(".hotel"),
+    //Formulario de Registro
+    formulario : document.querySelector("#formulario"),
     inputNombre : document.querySelector("#nombre"),
     inputApellido : document.querySelector("#apellido"),
     inputPisoN : document.querySelector("#pisoN"),
     inputPisoL : document.querySelector("#pisoL"),
     inputPago : document.querySelector("#pago"),
     inputFecha : document.querySelector("#fecha"),
-    btnCrear : document.querySelector("#crear"),
+    inputDias:  document.querySelector("#dias"),
+    inputFechaFin : document.querySelector("#fechaFin"),
+    btnRegistro : document.querySelector("#btnRegistro"),
     btnMostrar : document.querySelector("#mostrar"),
     inquilinos : document.querySelector(".inquilinos")
 };
@@ -54,8 +52,12 @@ for (const letra of letras) {
     html.inputPisoL.innerHTML += `<option>${letra}</option>`    
 };
 
-html.btnCrear.addEventListener("click", crear);
-html.btnMostrar.addEventListener("click", mostrarInquilinos);
+html.btnRegistro.addEventListener("click", crear);
+// html.btnMostrar.addEventListener("click", mostrarInquilinos);
+window.addEventListener("load", () => html.inputDias.addEventListener("change", vencimiento));
+html.btnForm.addEventListener("click", cargarFormulario)
+html.btnHotel.addEventListener("click", cargarHotel)
+
 
 
 function crear (evt) {
@@ -87,4 +89,27 @@ function mostrarInquilinos() {
        
 };
 
+function vencimiento(e) {
+    // console.log(e); 
+    const obtenerFecha = html.inputFecha.value;
+    let obtenerDias = 
+    console.log(obtenerFecha);
+    let aver = obtenerFecha + obtenerDias;
+    // html.inputFechaFin.value = aver
+    console.log(obtenerDias);
+    console.log(aver);
+}
 
+function cargarFormulario (e) {
+    
+    html.hotelDisplay.style.display = "none";
+
+    html.formularioDisplay.style.display = "block";
+}
+
+function cargarHotel (e) {
+
+    html.formularioDisplay.style.display = "none";
+
+    html.hotelDisplay.style.display = "block";
+}
