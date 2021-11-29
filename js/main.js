@@ -1,15 +1,3 @@
-const titulo = document.querySelector("#titulo");
-
-titulo.onmouseover = cambio;
-titulo.onmouseout = volver;
-
-function cambio() {
-    titulo.textContent = "Bienvenid@ a la plataforma";
-};
-function volver(){
-    titulo.textContent = "Curso JavaScript"
-}
-
 const pisos = [1, 2, 3, 4, 5];
 const letras = ["A", "B", "C", "D", "E"];
 let vecinos = JSON.parse(localStorage.getItem("data"));
@@ -19,18 +7,26 @@ if (!vecinos) {
 };
  
 
-const html = {
-    id : document.querySelector("#formulario"),
-    inputNombre : document.querySelector("#nombre"),
-    inputApellido : document.querySelector("#apellido"),
-    inputPisoN : document.querySelector("#pisoN"),
-    inputPisoL : document.querySelector("#pisoL"),
-    inputPago : document.querySelector("#pago"),
-    inputFecha : document.querySelector("#fecha"),
-    btnCrear : document.querySelector("#crear"),
-    btnMostrar : document.querySelector("#mostrar"),
-    inquilinos : document.querySelector(".inquilinos")
-};
+//Menú de navegación
+menu = $("#menu")
+btnHome = $("#btn-home")
+btnForm = $("#btn-form")
+btnHotel = $("#btn-hotel")
+formularioDisplay = $(".formularioDisplay")
+hotelDisplay = $(".hotel")
+//Formulario de Registro
+formulario = $("#formulario")
+inputNombre = $("#nombre")
+inputApellido = $("#apellido")
+inputPisoN = $("#pisoN")
+inputPisoL = $("#pisoL")
+inputPago = $("#pago")
+inputFecha = $("#fecha")
+inputDias=  $("#dias")
+inputFechaFin = $("#fechaFin")
+btnRegistro = $("#btnRegistro")
+btnMostrar = $("#mostrar")
+inquilinos = $(".inquilinos")
 
 
 class Vecino {
@@ -46,27 +42,29 @@ class Vecino {
 };
 
 for (const piso of pisos) {
-    const option = document.createElement("OPTION");
-    option.textContent = piso
-    html.inputPisoN.appendChild(option)
+    inputPisoN.append(`<option>${piso}</option>`)
 };
 for (const letra of letras) {
-    html.inputPisoL.innerHTML += `<option>${letra}</option>`    
+    inputPisoL.append(`<option>${letra}</option>`)    
 };
 
-html.btnCrear.addEventListener("click", crear);
-html.btnMostrar.addEventListener("click", mostrarInquilinos);
+btnRegistro.click(crear);
+// html.btnMostrar.addEventListener("click", mostrarInquilinos);
+// html.inputDias.addEventListener("change", vencimiento);
+btnForm.click(() => cargarElemento(hotelDisplay, formularioDisplay));
+btnHotel.click(() => cargarElemento(formularioDisplay, hotelDisplay));
+
 
 
 function crear (evt) {
     // evt.preventDefault();    
     const id = vecinos.length + 1;
-    const nombre = html.inputNombre.value;
-    const apellido = html.inputApellido.value;
-    const pisoN = html.inputPisoN.value;
-    const pisoL = html.inputPisoL.value;
-    const pago = html.inputPago.checked;
-    const fecha = html.inputFecha.value;
+    const nombre = inputNombre.val();
+    const apellido = inputApellido.val();
+    const pisoN = inputPisoN.val();
+    const pisoL = inputPisoL.val();
+    const pago = inputPago.prop("checked");
+    const fecha = inputFecha.val();
 
     vecinosAdd = new Vecino(id, pisoN, pisoL, nombre, apellido, pago, fecha);
     vecinos.push(vecinosAdd)
@@ -74,17 +72,25 @@ function crear (evt) {
     localStorage.setItem("data", JSON.stringify(vecinos));
 };
 
-function mostrarInquilinos() {
+// function mostrarInquilinos() {   Va a ir en panel de control, no está pasado a jQuery
     
-    html.inquilinos.innerHTML=" ";
+//     html.inquilinos.innerHTML=" ";
 
-    vecinos.forEach( persona => {
-        const div = document.createElement("DIV");
-        div.classList.add("card");
-        div.innerHTML = `<p> Nombre: ${persona.nombre} ${persona.apellido},  Piso: ${persona.pisoN + persona.pisoL} <p>`;
-        html.inquilinos.appendChild(div)
-    })
+//     vecinos.forEach( persona => {
+//         const div = document.createElement("DIV");
+//         div.classList.add("card");
+//         div.innerHTML = `<p> Nombre: ${persona.nombre} ${persona.apellido},  Piso: ${persona.pisoN + persona.pisoL} <p>`;
+//         html.inquilinos.appendChild(div)
+//     })
        
-};
+// };
 
+function vencimiento(e) {
+    //probando de calcular sobre fechas
+}
+
+function cargarElemento (ele1, ele2) {
+    ele1.css("display", "none")
+    ele2.css("display", "block");
+}
 
