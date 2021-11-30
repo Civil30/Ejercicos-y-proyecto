@@ -54,7 +54,7 @@ for (const letra of letras) {
 
 html.btnRegistro.addEventListener("click", crear);
 // html.btnMostrar.addEventListener("click", mostrarInquilinos);
-window.addEventListener("load", () => html.inputDias.addEventListener("change", vencimiento));
+html.inputDias.addEventListener("input", vencimiento);
 html.btnForm.addEventListener("click", cargarFormulario)
 html.btnHotel.addEventListener("click", cargarHotel)
 
@@ -89,15 +89,31 @@ function mostrarInquilinos() {
        
 };
 
+
 function vencimiento(e) {
-    // console.log(e); 
-    const obtenerFecha = html.inputFecha.value;
-    let obtenerDias = 
+    
+    console.log(html.inputFecha.value)
+    let obtenerDias = Number(html.inputDias.value);
+    let obtenerFecha = new Date(html.inputFecha.value);
+    let suma = obtenerFecha.setDate(obtenerFecha.getDate() + obtenerDias + 1);
+
+    let a = {
+       año: obtenerFecha.getFullYear(),
+       mes: obtenerFecha.getMonth() + 1,
+       dia: obtenerFecha.getDate()
+
+       
+    }
+    
+    
+    html.inputFechaFin.value = `${a.año}-${a.mes}-${a.dia}`;
+
+
+    
+    console.log(a);
     console.log(obtenerFecha);
-    let aver = obtenerFecha + obtenerDias;
-    // html.inputFechaFin.value = aver
-    console.log(obtenerDias);
-    console.log(aver);
+    // console.log(obtenerDias);
+    // console.log(suma);
 }
 
 function cargarFormulario (e) {
@@ -112,4 +128,8 @@ function cargarHotel (e) {
     html.formularioDisplay.style.display = "none";
 
     html.hotelDisplay.style.display = "block";
+}
+
+function formatearFecha (fecha, año, mes, dia) {
+    fecha.get
 }
