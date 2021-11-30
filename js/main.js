@@ -1,3 +1,5 @@
+const costoPorDia = 20;
+const costoPorDiaAlta = 35;
 const pisos = [1, 2, 3, 4, 5];
 const letras = ["A", "B", "C", "D", "E"];
 let vecinos = JSON.parse(localStorage.getItem("data"));
@@ -21,25 +23,33 @@ const html = {
     inputApellido : document.querySelector("#apellido"),
     inputPisoN : document.querySelector("#pisoN"),
     inputPisoL : document.querySelector("#pisoL"),
-    inputPago : document.querySelector("#pago"),
+    inputTelefono: document.querySelector("#telefono"),
     inputFecha : document.querySelector("#fecha"),
     inputDias:  document.querySelector("#dias"),
     inputFechaFin : document.querySelector("#fechaFin"),
+    inputTemporada: document.querySelector("#temporada-checkbox"),
+    inputCosto: document.querySelector("#input-costo"),
+    inputPago : document.querySelector("#pago-checkbox"),
     btnRegistro : document.querySelector("#btnRegistro"),
+    
     btnMostrar : document.querySelector("#mostrar"),
     inquilinos : document.querySelector(".inquilinos")
 };
 
 
 class Vecino {
-    constructor (id, pisoN, pisoL, nombre, apellido, pago, fecha){
+    constructor (id, nombre, apellido, pisoN, pisoL, telefono, fecha, fechaDefechaDeVencimiento, temporadaAlta, costo, pago){
         this.id = id;
-        this.pisoN = pisoN;
-        this.pisoL = pisoL;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.pago = pago;
+        this.pisoN = pisoN;
+        this.pisoL = pisoL;
+        this.telefono = telefono;
         this.fecha = fecha;
+        this.fechaDefechaDeVencimiento = fechaDefechaDeVencimiento;
+        this.temporadaAlta = temporadaAlta;
+        this.costo = costo;
+        this.pago = pago;
     }
 };
 
@@ -54,7 +64,7 @@ for (const letra of letras) {
 
 html.btnRegistro.addEventListener("click", crear);
 // html.btnMostrar.addEventListener("click", mostrarInquilinos);
-html.inputDias.addEventListener("input", vencimiento);
+html.inputDias.addEventListener("input", fechaDeVencimiento);
 html.btnForm.addEventListener("click", cargarFormulario)
 html.btnHotel.addEventListener("click", cargarHotel)
 
@@ -67,10 +77,14 @@ function crear (evt) {
     const apellido = html.inputApellido.value;
     const pisoN = html.inputPisoN.value;
     const pisoL = html.inputPisoL.value;
-    const pago = html.inputPago.checked;
+    const telefono = html.inputTelefono.value;
     const fecha = html.inputFecha.value;
+    const fechaDeVencimiento = html.inputFechaFin.value;
+    const temporadaAlta = html.inputTemporada.checked;
+    const costo = html.inputCosto.value;
+    const pago = html.inputPago.checked;
 
-    vecinosAdd = new Vecino(id, pisoN, pisoL, nombre, apellido, pago, fecha);
+    vecinosAdd = new Vecino(id, nombre, apellido, pisoN, pisoL, telefono, fecha, fechaDeVencimiento, temporadaAlta, costo, pago);
     vecinos.push(vecinosAdd)
 
     localStorage.setItem("data", JSON.stringify(vecinos));
@@ -90,46 +104,37 @@ function mostrarInquilinos() {
 };
 
 
-function vencimiento(e) {
-    
-    console.log(html.inputFecha.value)
-    let obtenerDias = Number(html.inputDias.value);
-    let obtenerFecha = new Date(html.inputFecha.value);
-    let suma = obtenerFecha.setDate(obtenerFecha.getDate() + obtenerDias + 1);
+function fechaDeVencimiento() {
+    const obtenerDias = Number(html.inputDias.value);
+    const obtenerFecha = new Date(html.inputFecha.value);
+    obtenerFecha.setDate(obtenerFecha.getDate() + obtenerDias + 1);
 
-    let a = {
+    const separarFecha = {
        año: obtenerFecha.getFullYear(),
-       mes: obtenerFecha.getMonth() + 1,
-       dia: obtenerFecha.getDate()
-
-       
+       mes: (obtenerFecha.getMonth() + 1).toString().padStart(2, 0),
+       dia: obtenerFecha.getDate().toString().padStart(2, 0)
     }
     
-    
-    html.inputFechaFin.value = `${a.año}-${a.mes}-${a.dia}`;
+    html.inputFechaFin.value = `${separarFecha.año}-${separarFecha.mes}-${separarFecha.dia}`;
 
-
-    
-    console.log(a);
-    console.log(obtenerFecha);
-    // console.log(obtenerDias);
-    // console.log(suma);
+    calcularPrecio()
 }
 
-function cargarFormulario (e) {
-    
-    html.hotelDisplay.style.display = "none";
+function calcularPrecio () {
+    html.inputTemporada.checked
+        ? html.inputCosto.value = `$ ${costoPorDiaAlta * html.inputDias.value}`
+        : html.inputCosto.value = `$ ${costoPorDia * html.inputDias.value}`
+    ;
+    html.inputTemporada.addEventListener("change", calcularPrecio)
+}
 
+
+function cargarFormulario () {
+    html.hotelDisplay.style.display = "none";
     html.formularioDisplay.style.display = "block";
 }
 
-function cargarHotel (e) {
-
+function cargarHotel () {
     html.formularioDisplay.style.display = "none";
-
     html.hotelDisplay.style.display = "block";
-}
-
-function formatearFecha (fecha, año, mes, dia) {
-    fecha.get
 }

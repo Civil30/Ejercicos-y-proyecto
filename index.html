@@ -33,11 +33,13 @@
                     <form id="formulario" action="">
                         <h3>Formulario de Registro</h3>
                         
+                        <!-- Nombre y Apellido -->
                         <div class="grid-2">
                             <input id="nombre" type="text" placeholder="Nombre" class="form-control">
                             <input id="apellido" type="text" placeholder="Apellido" class="form-control">
                         </div>
-
+                        
+                        <!-- Select y Telefono  -->
                         <div class="grid-2">
                             <div class="grid-2">
                                 <select id="pisoN" class="form-control">
@@ -47,17 +49,31 @@
                                     <option value="" selected disabled>Dpto</option>
                                 </select>
                             </div>
-                            <input id="numTel" type="number" min="0" placeholder="Teléfono" class="form-control">
+                            <input id="telefono" type="number" min="0" placeholder="Teléfono" class="form-control">
                         </div>
 
+                        <!-- Fecha y Días -->
                         <div class="grid-2">
-                            <input id="fecha" type="date" placeholder="Fecha" min="2017-04-08" max="2017-04-20" class="fecha form-control" required>
+                            <input id="fecha" type="date" placeholder="Fecha" class="fecha form-control" required>
                             <input id="dias" type="number" min="0" placeholder="Días" class="form-control">
                         </div>
 
+                        <!-- FechaFin y Temporada Alta -->
                         <div class="grid-2">
                             <input id="fechaFin" type="date" placeholder="Fecha" class="form-control" disabled required>
-                            
+                            <div class="form-control checkbox">
+                                <label for="temporada-checkbox" class=>Temporada Alta</label>
+                                <input id="temporada-checkbox" type="checkbox">
+                            </div>
+                        </div>
+
+                        <!-- Costo y Pago -->
+                        <div class="grid-2">
+                            <input id="input-costo" type="text" placeholder="$$$" class="form-control" disabled>
+                            <div class="form-control checkbox">
+                                <label for="pago-checkbox" class=>Pago Recibido</label>
+                                <input id="pago-checkbox" type="checkbox">
+                            </div>
                         </div>
 
                         <button id="btnRegistro" type="submit" class="form__btn">Registrar</button>
@@ -164,7 +180,7 @@
         </div>
     </div> -->
     
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
     <script src="./js/modernizr.js"></script>
     <script src="./js/main.js"></script>
 
