@@ -26,7 +26,7 @@ const html = {
     inputTelefono: document.querySelector("#telefono"),
     inputFecha : document.querySelector("#fecha"),
     inputDias:  document.querySelector("#dias"),
-    inputFechaFin : document.querySelector("#fechaFin"),
+    inputFechaFin : document.querySelector("#fecha-fin"),
     inputTemporada: document.querySelector("#temporada-checkbox"),
     inputCosto: document.querySelector("#input-costo"),
     inputPago : document.querySelector("#pago-checkbox"),
@@ -38,7 +38,7 @@ const html = {
 
 
 class Vecino {
-    constructor (id, nombre, apellido, pisoN, pisoL, telefono, fecha, fechaDefechaDeVencimiento, temporadaAlta, costo, pago){
+    constructor (id, nombre, apellido, pisoN, pisoL, telefono, fecha, fechaDeVencimiento, temporadaAlta, costo, pago){
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -46,7 +46,7 @@ class Vecino {
         this.pisoL = pisoL;
         this.telefono = telefono;
         this.fecha = fecha;
-        this.fechaDefechaDeVencimiento = fechaDefechaDeVencimiento;
+        this.fechaDeVencimiento = fechaDeVencimiento;
         this.temporadaAlta = temporadaAlta;
         this.costo = costo;
         this.pago = pago;
@@ -62,7 +62,7 @@ for (const letra of letras) {
     html.inputPisoL.innerHTML += `<option>${letra}</option>`    
 };
 
-html.btnRegistro.addEventListener("click", crear);
+html.formulario.addEventListener("submit", crear);
 // html.btnMostrar.addEventListener("click", mostrarInquilinos);
 html.inputDias.addEventListener("input", fechaDeVencimiento);
 html.btnForm.addEventListener("click", cargarFormulario)

@@ -20,115 +20,73 @@
         <button id="btn-hotel">Hotel</button>
     </nav>
 
-    <!-- <div class="contenido w-50"> -->
-
-
-        <div class="formularioDisplay">
-
-            <div class="wrapper">
-                <div class="inner">
-                    <div class="image-holder">
-                        <img class="img-lateral" src="img/example-8.png" alt="image">
-                    </div>
-                    <form id="formulario" action="">
-                        <h3>Formulario de Registro</h3>
-                        
-                        <!-- Nombre y Apellido -->
-                        <div class="grid-2">
-                            <input id="nombre" type="text" placeholder="Nombre" class="form-control">
-                            <input id="apellido" type="text" placeholder="Apellido" class="form-control">
-                        </div>
-                        
-                        <!-- Select y Telefono  -->
-                        <div class="grid-2">
-                            <div class="grid-2">
-                                <select id="pisoN" class="form-control">
-                                    <option value="" selected disabled>Piso</option>
-                                </select>
-                                <select id="pisoL" class="form-control">
-                                    <option value="" selected disabled>Dpto</option>
-                                </select>
-                            </div>
-                            <input id="telefono" type="number" min="0" placeholder="Teléfono" class="form-control">
-                        </div>
-
-                        <!-- Fecha y Días -->
-                        <div class="grid-2">
-                            <input id="fecha" type="date" placeholder="Fecha" class="fecha form-control" required>
-                            <input id="dias" type="number" min="0" placeholder="Días" class="form-control">
-                        </div>
-
-                        <!-- FechaFin y Temporada Alta -->
-                        <div class="grid-2">
-                            <input id="fechaFin" type="date" placeholder="Fecha" class="form-control" disabled required>
-                            <div class="form-control checkbox">
-                                <label for="temporada-checkbox" class=>Temporada Alta</label>
-                                <input id="temporada-checkbox" type="checkbox">
-                            </div>
-                        </div>
-
-                        <!-- Costo y Pago -->
-                        <div class="grid-2">
-                            <input id="input-costo" type="text" placeholder="$$$" class="form-control" disabled>
-                            <div class="form-control checkbox">
-                                <label for="pago-checkbox" class=>Pago Recibido</label>
-                                <input id="pago-checkbox" type="checkbox">
-                            </div>
-                        </div>
-
-                        <button id="btnRegistro" type="submit" class="form__btn">Registrar</button>
-                    </form>
-                </div>
-                
-            </div>
+    
+    <div class="formularioDisplay">
         
-            <div class="contenido inquilinos">
+        <div class="wrapper">
+            <div class="inner">
+                <div class="image-holder">
+                    <img class="img-lateral" src="img/example-8.png" alt="image">
+                </div>
+                <form  id="formulario" action="">
+                    <h3>Formulario de Registro</h3>
+                    
+                    <!-- Nombre y Apellido -->
+                    <div class="grid-2">
+                        <input id="nombre" type="text" placeholder="Nombre" class="form-control">
+                        <input id="apellido" type="text" placeholder="Apellido" class="form-control">
+                    </div>
+                    
+                    <!-- Select y Telefono  -->
+                    <div class="grid-2">
+                        <div class="grid-2">
+                            <select id="pisoN" class="form-control">
+                                <option value="" selected disabled>Piso</option>
+                            </select>
+                            <select id="pisoL" class="form-control">
+                                <option value="" selected disabled>Dpto</option>
+                            </select>
+                        </div>
+                        <input id="telefono" type="number" min="0" placeholder="Teléfono" class="form-control">
+                    </div>
 
+                    <!-- Fecha y Días -->
+                    <div class="grid-2">
+                        <input id="fecha" type="date" placeholder="Fecha" class="fecha form-control" required>
+                        <input id="dias" type="number" min="0" placeholder="Días" class="form-control">
+                    </div>
+
+                    <!-- FechaFin y Temporada Alta -->
+                    <div class="grid-2">
+                        <input id="fecha-fin" type="date" placeholder="Fecha" class="form-control" disabled required>
+                        <div class="form-control checkbox">
+                            <label for="temporada-checkbox" class=>Temporada Alta</label>
+                            <input id="temporada-checkbox" type="checkbox">
+                        </div>
+                    </div>
+
+                    <!-- Costo y Pago -->
+                    <div class="grid-2">
+                        <input id="input-costo" type="text" placeholder="$$$" class="form-control" disabled>
+                        <div class="form-control checkbox">
+                            <label for="pago-checkbox" class=>Pago Recibido</label>
+                            <input id="pago-checkbox" type="checkbox">
+                        </div>
+                    </div>
+
+                    <button id="btnRegistro" type="submit" class="form__btn">Registrar</button>
+                </form>
             </div>
+            
+        </div>
+    
+        <div class="contenido inquilinos">
 
         </div>
 
-            <!-- <h2>Formulario de registro</h2>
+    </div>
 
-            <form class="formulario" id="formulario">
-                <div class="campo">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" name="nombre" id="nombre" placeholder="Ingresar Nombre" />
-                </div>
-                <div class="campo">
-                    <label for="apellido">Apellido</label>
-                    <input type="text" name="apellido" id="apellido" placeholder="Ingresar Apellido" />
-                </div>
-                <div class="campo">
-                    <label for="pisoN">Piso</label>
-                    <select id="pisoN">
-                    </select>
-                    <select id="pisoL">
-                    </select>
-                </div>
-                <div class="campo">
-                    <label for="pisoL">Piso letra</label>
-                </div>
-                <div class="campo">
-                    <label for="fecha">Fecha</label>
-                    <input type="date" id="fecha">
-                </div>
-                <div class="campo">
-                    <label for="pago">Pago</label>
-                    <input type="checkbox" id="pago">
-                </div>
-                <div>
-                    <input type="submit" id="crear" value="Crear">
-
-                </div>
-                <div>
-                    <input type="button" id="mostrar" value="Mostrar">
-
-                </div>
-            </form> -->
-
-        
-    <!-- </div> -->
+           
 
 
     
