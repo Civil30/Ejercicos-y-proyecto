@@ -14,174 +14,36 @@
 
 <body>
 
+    <header class="titulo centrar-texto">
+        <h1>HapiPotter</h1>
+    </header>
 
-    <nav id="menu">
-        <button id="btn-form">Formulario</button>
-        <button id="btn-hotel">Hotel</button>
-    </nav>
-
-    <!-- <div class="contenido w-50"> -->
-
-
-        <div class="formularioDisplay">
-
-            <div class="wrapper">
-                <div class="inner">
-                    <div class="image-holder">
-                        <img class="img-lateral" src="img/example-8.png" alt="image">
-                    </div>
-                    <form id="formulario" action="">
-                        <h3>Formulario de Registro</h3>
-                        
-                        <!-- Nombre y Apellido -->
-                        <div class="grid-2">
-                            <input id="nombre" type="text" placeholder="Nombre" class="form-control">
-                            <input id="apellido" type="text" placeholder="Apellido" class="form-control">
-                        </div>
-                        
-                        <!-- Select y Telefono  -->
-                        <div class="grid-2">
-                            <div class="grid-2">
-                                <select id="pisoN" class="form-control">
-                                    <option value="" selected disabled>Piso</option>
-                                </select>
-                                <select id="pisoL" class="form-control">
-                                    <option value="" selected disabled>Dpto</option>
-                                </select>
-                            </div>
-                            <input id="telefono" type="number" min="0" placeholder="Teléfono" class="form-control">
-                        </div>
-
-                        <!-- Fecha y Días -->
-                        <div class="grid-2">
-                            <input id="fecha" type="date" placeholder="Fecha" class="fecha form-control" required>
-                            <input id="dias" type="number" min="0" placeholder="Días" class="form-control">
-                        </div>
-
-                        <!-- FechaFin y Temporada Alta -->
-                        <div class="grid-2">
-                            <input id="fechaFin" type="date" placeholder="Fecha" class="form-control" disabled required>
-                            <div class="form-control checkbox">
-                                <label for="temporada-checkbox" class=>Temporada Alta</label>
-                                <input id="temporada-checkbox" type="checkbox">
-                            </div>
-                        </div>
-
-                        <!-- Costo y Pago -->
-                        <div class="grid-2">
-                            <input id="input-costo" type="text" placeholder="$$$" class="form-control" disabled>
-                            <div class="form-control checkbox">
-                                <label for="pago-checkbox" class=>Pago Recibido</label>
-                                <input id="pago-checkbox" type="checkbox">
-                            </div>
-                        </div>
-
-                        <button id="btnRegistro" type="submit" class="form__btn">Registrar</button>
-                    </form>
-                </div>
-                
-            </div>
-        
-            <div class="contenido inquilinos">
-
-            </div>
-
-        </div>
-
-            <!-- <h2>Formulario de registro</h2>
-
-            <form class="formulario" id="formulario">
-                <div class="campo">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" name="nombre" id="nombre" placeholder="Ingresar Nombre" />
-                </div>
-                <div class="campo">
-                    <label for="apellido">Apellido</label>
-                    <input type="text" name="apellido" id="apellido" placeholder="Ingresar Apellido" />
-                </div>
-                <div class="campo">
-                    <label for="pisoN">Piso</label>
-                    <select id="pisoN">
-                    </select>
-                    <select id="pisoL">
-                    </select>
-                </div>
-                <div class="campo">
-                    <label for="pisoL">Piso letra</label>
-                </div>
-                <div class="campo">
-                    <label for="fecha">Fecha</label>
-                    <input type="date" id="fecha">
-                </div>
-                <div class="campo">
-                    <label for="pago">Pago</label>
-                    <input type="checkbox" id="pago">
-                </div>
-                <div>
-                    <input type="submit" id="crear" value="Crear">
-
-                </div>
-                <div>
-                    <input type="button" id="mostrar" value="Mostrar">
-
-                </div>
-            </form> -->
-
-        
-    <!-- </div> -->
-
-
-    
-
-    <div class="hotel">
-
-        <div class="ventanas">
-            <button id="5E" class="ventana"></button>
-            <button id="5D" class="ventana"></button>
-            <button id="5C" class="ventana"></button>
-            <button id="5B" class="ventana"></button>
-            <button id="5A" class="ventana"></button>
-            <button id="4E" class="ventana"></button>
-            <button id="4D" class="ventana"></button>
-            <button id="4C" class="ventana"></button>
-            <button id="4B" class="ventana"></button>
-            <button id="4A" class="ventana"></button>
-            <button id="3E" class="ventana"></button>
-            <button id="3D" class="ventana"></button>
-            <button id="3C" class="ventana"></button>
-            <button id="3B" class="ventana"></button>
-            <button id="3A" class="ventana"></button>
-            <button id="2E" class="ventana"></button>
-            <button id="2D" class="ventana"></button>
-            <button id="2C" class="ventana"></button>
-            <button id="2B" class="ventana"></button>
-            <button id="2A" class="ventana"></button>
-            <button id="1E" class="ventana"></button>
-            <button id="1D" class="ventana"></button>
-            <button id="1C" class="ventana"></button>
-            <button id="1B" class="ventana"></button>
-            <button id="1A" class="ventana"></button>
-        </div>
+    <div class="busqueda contenedor">
+        <input type="text" list="opciones" placeholder="Buscar Personaje">
+        <datalist id="opciones">
+            <option>Harry Potter</option>
+            <option>Hermione Granger</option>
+            <option>Albus Dumbledore</option>
+            <option>Voldemort</option>
+        </datalist>    
+        <button>Buscar</button>
     </div>
 
+    <main class="contenedor">
+        <section class="personajes">
+            <div class="barrita centrar">
+                <div class="carga"></div>
+            </div>
+                <progress></progress>
+            <div class="card">
 
-    <!-- <div class="contenedor-card">
-        <div class="card">
-            <h3>Piso y Dpto</h3>
-            <img src="" alt="">
-            <ul>
-                <li>Nombre y Apellido</li>
-                <li>Telefono</li>
-                <li>Piso y Dpto</li>
-                <li>Pago</li>
-                <li>Fecha de Ingreso</li>
-                <li>Vencimiento</li>
-            </ul>
-        </div>
-    </div> -->
+            </div>
+            
+        </section>
+    </main>
+
     
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
-    <script src="./js/modernizr.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="./js/main.js"></script>
 
 </body>
