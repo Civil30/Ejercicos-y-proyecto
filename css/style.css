@@ -29,27 +29,27 @@ h1 {
     height: 2.5rem;
 }
 
-.contenedor {
+/* .contenedor {
     max-width: 120rem;
-}
+} */
 
 .personajes {
 
 }
 .barrita {
     border: 1px groove rgb(167, 164, 164);
-    width: 20rem;
+    width: 40rem;
     margin: 5rem auto;
-    height: 2rem;
+    height: 40rem;
     border-radius: 10px;
     background-color: rgba(129, 129, 129, 0.226);
 }
 
 .carga {
     background-color: #0060df;
-    width: 5rem;
-    height: 2rem;
-    border-radius: 10px;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
 }
 
 .card {
