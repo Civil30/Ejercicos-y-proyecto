@@ -5,10 +5,6 @@ const letras = ["A", "B", "C", "D", "E"];
 const vecinos = JSON.parse(localStorage.getItem("data")) || [];
 
 
- 
-
-
-
 const html = {
     //Menú de navegación
     menu : document.querySelector("#menu"),
@@ -136,15 +132,31 @@ function tomarPago () {
     if (html.inputPago.checked) {
         html.inputCosto.style["background-color"] = "#0a66c2";
     }
-    
 }
 
 function cargarFormulario () {
+    document.body.style["background-color"] = "#BEAEE2";
     html.hotelDisplay.style.display = "none";
     html.formularioDisplay.style.display = "block";
 }
 
 function cargarHotel () {
+    document.body.style["background-color"] = "white";
     html.formularioDisplay.style.display = "none";
     html.hotelDisplay.style.display = "block";
 }
+
+
+let arrow = document.querySelectorAll(".arrow");
+for (var i = 0; i < arrow.length; i++) {
+arrow[i].addEventListener("click", (e)=>{
+let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+arrowParent.classList.toggle("showMenu");
+});
+}
+let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".bx-menu");
+console.log(sidebarBtn);
+sidebarBtn.addEventListener("click", ()=>{
+sidebar.classList.toggle("close");
+});
