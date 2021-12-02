@@ -9,10 +9,10 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     background-repeat: no-repeat;
-    background-image: url(../img/34.jpg);
+    /* background-image: url(../img/34.jpg); */
     background-size: cover;
     background-position: center center;
-	background-color: #BEAEE2;
+	/* background-color: #BEAEE2; */
     font-size: 1.6rem;
 
 }
@@ -196,6 +196,7 @@ select option[value=""][disabled] {
     }
 }
 
+
 /*********** FORMULARIO FIN **************/
 
 
@@ -222,9 +223,10 @@ button:hover {
     background-position: center center;
 }
 
-.home {
+.formularioDisplay {
     display: none;
 }
+
 
 .ventanas {
     padding-top: 23rem;
@@ -245,20 +247,18 @@ button:hover {
 }
 
 /******card******/
-/* .contenedor-card {
-    width: 100%;
-    display: flex;
-    gap: 50px;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 30px;
-    background-color: whitesmoke;
-    border-radius: 1rem;
-} */
+.contenedor-card {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+.contenedor-card
+.card img {
+    /* width: 5rem; */
+}
 
 /********* Navegacion *************/
 /* Google Fonts Import Link */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 *{
   margin: 0;
   padding: 0;
@@ -501,4 +501,4 @@ button:hover {
   .sidebar.close .nav-links li .sub-menu{
     display: none;
   }
-}
+} */

@@ -8,10 +8,11 @@ const vecinos = JSON.parse(localStorage.getItem("data")) || [];
 const html = {
     //Menú de navegación
     menu : document.querySelector("#menu"),
-    btnHome : document.querySelector("#btn-home"),
+    btnControl: document.querySelector("#btn-control"),
     btnForm : document.querySelector("#btn-form"),
     btnHotel : document.querySelector("#btn-hotel"),
     formularioDisplay : document.querySelector(".formularioDisplay"),
+    cardDisplay: document.querySelector(".contenedor-card"),
     hotelDisplay : document.querySelector(".hotel"),
     //Formulario de Registro
     formulario : document.querySelector("#formulario"),
@@ -65,6 +66,7 @@ html.formulario.addEventListener("submit", crear);
 html.inputDias.addEventListener("input", fechaDeVencimiento);
 html.btnForm.addEventListener("click", cargarFormulario)
 html.btnHotel.addEventListener("click", cargarHotel)
+html.btnControl.addEventListener("click", cargarControl)
 html.inputPago.addEventListener("change", tomarPago)
 
 
@@ -146,17 +148,23 @@ function cargarHotel () {
     html.hotelDisplay.style.display = "block";
 }
 
-
-let arrow = document.querySelectorAll(".arrow");
-for (var i = 0; i < arrow.length; i++) {
-arrow[i].addEventListener("click", (e)=>{
-let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
-arrowParent.classList.toggle("showMenu");
-});
+function cargarControl () {
+    document.body.style["background-color"] = "red";
+    html.formularioDisplay.style.display = "none";
+    html.cardDisplay.style.display = "block";
 }
-let sidebar = document.querySelector(".sidebar");
-let sidebarBtn = document.querySelector(".bx-menu");
-console.log(sidebarBtn);
-sidebarBtn.addEventListener("click", ()=>{
-sidebar.classList.toggle("close");
-});
+
+
+// let arrow = document.querySelectorAll(".arrow");
+// for (var i = 0; i < arrow.length; i++) {
+// arrow[i].addEventListener("click", (e)=>{
+// let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+// arrowParent.classList.toggle("showMenu");
+// });
+// }
+// let sidebar = document.querySelector(".sidebar");
+// let sidebarBtn = document.querySelector(".bx-menu");
+// console.log(sidebarBtn);
+// sidebarBtn.addEventListener("click", ()=>{
+// sidebar.classList.toggle("close");
+// });
