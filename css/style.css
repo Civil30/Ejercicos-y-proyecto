@@ -93,8 +93,6 @@ a:hover {
     border-radius: 5px;
     border: none;
     text-align: center;
-    /* background-color: #e85252; */
-    /* background-color: #edd4a4; */
 }
    
 .form-wrapper {
@@ -137,13 +135,15 @@ select {
     flex-basis: 100%;
 }
 #fecha-fin {
-    background-color: #edd4a4;
+    background-color: #544179;
+    color: whitesmoke;
 }
 #input-costo {
-    background-color: #e85252;
+    background-color: rgb(255, 94, 94);
+    color: whitesmoke;
 }
 #input-costo::placeholder {
-    color: black;
+    color: white;
 }
 
 select option[value=""][disabled] {

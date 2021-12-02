@@ -2,12 +2,12 @@ const costoPorDia = 20;
 const costoPorDiaAlta = 35;
 const pisos = [1, 2, 3, 4, 5];
 const letras = ["A", "B", "C", "D", "E"];
-let vecinos = JSON.parse(localStorage.getItem("data"));
+const vecinos = JSON.parse(localStorage.getItem("data")) || [];
 
-if (!vecinos) {
-    vecinos = [] 
-};
+
  
+
+
 
 const html = {
     //Menú de navegación
@@ -35,6 +35,8 @@ const html = {
     btnMostrar : document.querySelector("#mostrar"),
     inquilinos : document.querySelector(".inquilinos")
 };
+
+
 
 
 class Vecino {
@@ -67,6 +69,7 @@ html.formulario.addEventListener("submit", crear);
 html.inputDias.addEventListener("input", fechaDeVencimiento);
 html.btnForm.addEventListener("click", cargarFormulario)
 html.btnHotel.addEventListener("click", cargarHotel)
+html.inputPago.addEventListener("change", tomarPago)
 
 
 
@@ -121,13 +124,20 @@ function fechaDeVencimiento() {
 }
 
 function calcularPrecio () {
-    html.inputTemporada.checked
-        ? html.inputCosto.value = `$ ${costoPorDiaAlta * html.inputDias.value}`
-        : html.inputCosto.value = `$ ${costoPorDia * html.inputDias.value}`
-    ;
+    html.inputCosto.value = `$ ${costoPorDia * html.inputDias.value}`;
+    if(html.inputTemporada.checked) {
+        html.inputCosto.value = `$ ${costoPorDiaAlta * html.inputDias.value}`;
+    };
     html.inputTemporada.addEventListener("change", calcularPrecio)
 }
 
+function tomarPago () {
+    html.inputCosto.style["background-color"] = "#e85252"
+    if (html.inputPago.checked) {
+        html.inputCosto.style["background-color"] = "#0a66c2";
+    }
+    
+}
 
 function cargarFormulario () {
     html.hotelDisplay.style.display = "none";
