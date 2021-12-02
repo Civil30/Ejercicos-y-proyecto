@@ -11,9 +11,9 @@ const html = {
     btnControl: document.querySelector("#btn-control"),
     btnForm : document.querySelector("#btn-form"),
     btnHotel : document.querySelector("#btn-hotel"),
-    formularioDisplay : document.querySelector(".formularioDisplay"),
-    cardDisplay: document.querySelector(".contenedor-card"),
-    hotelDisplay : document.querySelector(".hotel"),
+    formularioDisplay : document.querySelector("#formulario-display"),
+    cardDisplay: document.querySelector("#card-display"),
+    hotelDisplay : document.querySelector("#hotel-display"),
     //Formulario de Registro
     formulario : document.querySelector("#formulario"),
     inputNombre : document.querySelector("#nombre"),

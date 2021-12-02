@@ -209,11 +209,6 @@ button:hover {
     margin: 0 auto;
 }
 
-.card {
-    color: bisque;
-    text-transform: uppercase;
-}
-
 .hotel {
     display: none;
     height: 92rem;
@@ -246,14 +241,24 @@ button:hover {
     cursor: pointer;
 }
 
-/******card******/
+/****** CARD ******/
 .contenedor-card {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap: 2rem;
+    max-width: 95%;
+    margin: 0 auto;
 }
-.contenedor-card
+.card {
+    color: black;
+    border: 0.5px groove black;
+    border-radius: 5px;
+    line-height: 2;
+}
 .card img {
-    /* width: 5rem; */
+    max-width: 60%;
+    display: block;
+    margin: 0 auto;
 }
 
 /********* Navegacion *************/
