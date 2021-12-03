@@ -11,6 +11,7 @@ body {
     background-size: cover;
     /* background-position: center center; */
     font-size: 1.6rem;
+    line-height: 2;
 }
 h1 {
     font-size: 5rem;
@@ -26,7 +27,9 @@ h1 {
 }
 .busqueda input {
     width: 30rem;
-    height: 2.5rem;
+    /* height: 2.5rem; */
+    padding: 1rem;
+
 }
 
 /* .contenedor {
@@ -37,32 +40,34 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-
-}
-.barrita {
-    border: 1px groove rgb(167, 164, 164);
-    width: 40rem;
-    margin: 5rem auto;
-    height: 40rem;
-    border-radius: 10px;
-    background-color: rgba(129, 129, 129, 0.226);
-}
-
-.carga {
-    background-color: #0060df;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-}
-.iniciar {
-    width: 6rem;
-    height: 6rem;
-    background-color: tomato;
-    color: black;
-    cursor: pointer;
-    font-weight: bold;
-    border: 1px solid gray;
+    max-width: 90%;
+    margin: 10rem auto
 }
 .card {
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+    border: 1px solid black;
+}
 
+.card h2 {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Yusei Magic', sans-serif;
+}
+.card img {
+    max-width: 30rem;
+    height: auto;
+}
+li {
+    list-style: none;
+    font-family: 'Yusei Magic', sans-serif;
+}
+button {
+    padding: 0 1rem;
+    cursor: pointer;
+    background-color: #1a73e8;
+    border: none;
+    color: white;
+    border-radius: 5px;
 }

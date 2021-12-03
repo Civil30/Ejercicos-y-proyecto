@@ -6,9 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Yusei+Magic&display=swap" rel="stylesheet"> 
 
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"> -->
     <title>Introducción JavaScript</title>
 </head>
 
@@ -19,31 +18,23 @@
     </header>
 
     <div class="busqueda contenedor">
-        <input type="text" list="opciones" placeholder="Buscar Personaje">
+        <input id="input__buscar" type="text" list="opciones" placeholder="Buscar Personaje">
         <datalist id="opciones">
             <option>Harry Potter</option>
             <option>Hermione Granger</option>
-            <option>Albus Dumbledore</option>
-            <option>Voldemort</option>
+            <option>Rubeus Hagrid</option>
+            <option>Lord Voldemort</option>
         </datalist>    
-        <button>Buscar</button>
+        <button id="btn__buscar">Buscar</button>
     </div>
 
     <main class="contenedor">
         <section class="personajes">
-            <div class="barrita centrar">
-
-            <div class="carga"></div>
-            </div>
-            <button class="iniciar">Iniciar</button>
-
-            
-            <div class="card">
-
-            </div>
-            
+           
         </section>
     </main>
+    
+    
 
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
