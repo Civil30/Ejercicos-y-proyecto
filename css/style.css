@@ -195,6 +195,9 @@ select option[value=""][disabled] {
         
     }
 }
+.formularioDisplay {
+    display: none;
+}
 
 
 /*********** FORMULARIO FIN **************/
@@ -208,8 +211,8 @@ button:hover {
     max-width: 1200px;
     margin: 0 auto;
 }
-
-.hotel {
+/*********** HOTEL **************/
+#hotel-display {
     display: none;
     height: 92rem;
     background-image: url(../img/hotel.png);
@@ -217,11 +220,6 @@ button:hover {
     background-repeat: no-repeat;
     background-position: center center;
 }
-
-.formularioDisplay {
-    display: none;
-}
-
 
 .ventanas {
     padding-top: 23rem;
@@ -240,6 +238,8 @@ button:hover {
     height: 6rem;
     cursor: pointer;
 }
+
+/*********** FORMULARIO FIN **************/
 
 /****** CARD ******/
 .contenedor-card {

@@ -137,20 +137,22 @@ function tomarPago () {
 }
 
 function cargarFormulario () {
-    document.body.style["background-color"] = "#BEAEE2";
+    // document.body.style["background-color"] = "#BEAEE2";
     html.hotelDisplay.style.display = "none";
+    html.cardDisplay.style.display = "none";
     html.formularioDisplay.style.display = "block";
 }
 
 function cargarHotel () {
-    document.body.style["background-color"] = "white";
     html.formularioDisplay.style.display = "none";
+    html.cardDisplay.style.display = "none";
     html.hotelDisplay.style.display = "block";
 }
 
 function cargarControl () {
-    document.body.style["background-color"] = "red";
+    // document.body.style["background-color"] = "white";
     html.formularioDisplay.style.display = "none";
+    html.hotelDisplay.style.display = "none";
     html.cardDisplay.style.display = "block";
 }
 
