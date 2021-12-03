@@ -13,12 +13,13 @@ const harryDatos = () => {
 
 function mostrarCarta (datos) {
     
+    const inputMin = inputBuscar.val().toLowerCase()
     $(".personajes").empty()
 
     datos.forEach(ele => {        
         const {name, species, gender, house, dateOfBirth, image, actor} = ele;
 
-        if (inputBuscar.val().toLowerCase() == name.toLowerCase()) {
+        if ((name.toLowerCase().includes(inputMin))) {
             
             $(".personajes").prepend(`<div class="card">
                                         <h2>${name}</h2>
