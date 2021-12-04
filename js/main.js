@@ -187,14 +187,14 @@ function relacionar(id) {
     vecinos.forEach(ele => {
         const {nombre, apellido, pisoN, pisoL, telefono, fecha, fechaDeVencimiento, costo, pago} = ele;
 
-        // if(id == pisoN+pisoL){
+        if(id == pisoN+pisoL){
             html.hotelModal.innerHTML = `<h2>${nombre} ${apellido}</h2>
             <p>Teléfono ${telefono}</p>
             <p>Ingreso ${fecha}</p>
             <p>Egreso ${fechaDeVencimiento}</p>
             <p>A pagar ${costo}</p>
             <p>${pago}</p>`
-        // }
+        }
     })
 
     if (idVentanas() != idVecinos()) {
