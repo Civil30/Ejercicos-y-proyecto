@@ -7,7 +7,8 @@ const vecinos = JSON.parse(localStorage.getItem("data")) || [];
 
 const html = {
     //Menú de navegación
-    menu : document.querySelector("#menu"),
+    // menu : document.querySelector("#menu"),
+    menu : document.querySelectorAll(".btn-menu"),
     btnControl: document.querySelector("#btn-control"),
     btnForm : document.querySelector("#btn-form"),
     btnHotel : document.querySelector("#btn-hotel"),
@@ -29,8 +30,11 @@ const html = {
     inputPago : document.querySelector("#pago-checkbox"),
     btnRegistro : document.querySelector("#btnRegistro"),
     
+    btnVentanas :document.querySelector(".ventanas"),
+    btnVentana :document.querySelectorAll(".ventana"),
     btnMostrar : document.querySelector("#mostrar"),
-    inquilinos : document.querySelector(".inquilinos")
+    inquilinos : document.querySelector(".inquilinos"),
+    hotelModal: document.querySelector(".hotel-modal")
 };
 
 
@@ -61,8 +65,11 @@ for (const letra of letras) {
     html.inputPisoL.innerHTML += `<option>${letra}</option>`    
 };
 
+//Eventos
 html.formulario.addEventListener("submit", crear);
 // html.btnMostrar.addEventListener("click", mostrarInquilinos);
+// html.btnVentanas.addEventListener("click", mostrarInquilinosModal)
+// html.btnVentanas.addEventListener("click", relacionar)
 html.inputDias.addEventListener("input", fechaDeVencimiento);
 html.btnForm.addEventListener("click", cargarFormulario)
 html.btnHotel.addEventListener("click", cargarHotel)
@@ -155,6 +162,95 @@ function cargarControl () {
     html.hotelDisplay.style.display = "none";
     html.cardDisplay.style.display = "block";
 }
+// function mostrarOcultar() {
+// }
+// console.log(html.menu)
+// html.menu.forEach(el => console.log(el))
+
+function mostrarInquilinosModal(e) {
+    console.log(e.target);
+}
+function idVentanas(e) {
+    html.btnVentana.forEach(idVentana => {
+        idVentana.id
+        // console.log(id)
+    })
+}
+function idVecinos() {
+    vecinos.forEach(ele => {
+        const id = ele.pisoN + ele.pisoL
+        console.log(id)
+    })
+}
+
+function relacionar(id) {
+    vecinos.forEach(ele => {
+        const {nombre, apellido, pisoN, pisoL, telefono, fecha, fechaDeVencimiento, costo, pago} = ele;
+
+        // if(id == pisoN+pisoL){
+            html.hotelModal.innerHTML = `<h2>${nombre} ${apellido}</h2>
+            <p>Teléfono ${telefono}</p>
+            <p>Ingreso ${fecha}</p>
+            <p>Egreso ${fechaDeVencimiento}</p>
+            <p>A pagar ${costo}</p>
+            <p>${pago}</p>`
+        // }
+    })
+
+    if (idVentanas() != idVecinos()) {
+    }
+}
+
+
+html.btnVentanas.addEventListener("click", (e) => {
+    if( relacionar (e.target.id)) return
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // let arrow = document.querySelectorAll(".arrow");
