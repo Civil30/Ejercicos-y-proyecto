@@ -35,7 +35,7 @@ const html = {
     btnVentanas :document.querySelector(".ventanas"),
     btnVentana :document.querySelectorAll(".ventana"),
     btnMostrar : document.querySelector("#mostrar"),
-    inquilinos : document.querySelector(".inquilinos"),
+    inquilinos : document.querySelector(".contenedor-card"),
     hotelModal: document.querySelector(".hotel-modal")
 };
 
@@ -69,7 +69,7 @@ for (const letra of letras) {
 
 //Eventos
 html.formulario.addEventListener("submit", crear);
-// html.btnMostrar.addEventListener("click", mostrarInquilinos);
+html.btnMostrar.addEventListener("click", mostrarInquilinos);
 html.btnVentanas.addEventListener("click", hotelModal)
 html.inputDias.addEventListener("input", fechaDeVencimiento);
 html.inputTemporada.addEventListener("change", calcularPrecio)
@@ -95,15 +95,15 @@ function crear (evt) {
     const pago = html.inputPago.checked;
     
     
-    vecinos.forEach( inquilinos => {
-        const {pisoN, pisoL} = inquilinos;
-        if (pisoN + pisoL != pisoNumero + pisoLetra){
-            evt.preventDefault();    
+    // vecinos.forEach( inquilinos => {
+    //     const {pisoN, pisoL} = inquilinos;
+    //     if (pisoN + pisoL == pisoNumero + pisoLetra){
+    //         evt.preventDefault();    
     
-        }
+    //     }
         
         
-    })
+    // })
     
     vecinosAdd = new Vecino(id, nombre, apellido, pisoNumero, pisoLetra, telefono, fecha, fechaDeVencimiento, temporadaAlta, costo, pago);
     vecinos.push(vecinosAdd)
@@ -117,9 +117,37 @@ function mostrarInquilinos() {
     html.inquilinos.innerHTML=" ";
 
     vecinos.forEach( persona => {
+        const { nombre, apellido, pisoN, pisoL, telefono, fecha, fechaDeVencimiento, costo, pago } = persona
         const div = document.createElement("DIV");
         div.classList.add("card");
-        div.innerHTML = `<p> Nombre: ${persona.nombre} ${persona.apellido},  Piso: ${persona.pisoN + persona.pisoL} <p>`;
+        div.innerHTML = `<div class="card__imagen">
+                            <img src="./img/63765.jpg" alt="perfil">
+                        </div>
+                        <div class="card__pago">
+                            <p> ${pago}No Pago</p>
+                        </div>
+                        <div class="card__detalles">
+                            <h3>${nombre} ${apellido}</h3>
+                            <div class="card__detalles__grid">
+                                <div class="card__items">
+                                    <p>Ingreso</p> 
+                                    <p>${fecha}</p>
+                                </div>
+                                <div class="card__items">
+                                    <p>Egreso</p> 
+                                    <p>${fechaDeVencimiento}</p>
+                                </div>
+                                <div class="card__items">
+                                    <p>Teléfono</p> 
+                                    <p>${telefono}</p>
+                                </div>
+                                <div class="card__items">
+                                    <p>Costo</p> 
+                                    <p>${costo}</p>
+                                </div>
+                            </div>    
+                        </div>
+                        <button>Eliminar</button>`
         html.inquilinos.appendChild(div)
     })
        
@@ -176,20 +204,14 @@ function cargarControl () {
     html.hotelDisplay.style.display = "none";
     html.cardDisplay.style.display = "block";
 }
-// function mostrarOcultar() {
-// }
-// console.log(html.menu)
-// html.menu.forEach(el => console.log(el))
 
-function mostrarInquilinosModal(e) {
-    console.log(e.target);
-}
-function idVentanas(e) {
-    html.btnVentana.forEach(idVentana => {
-        idVentana.id
-        // console.log(id)
-    })
-}
+
+// function idVentanas(e) {
+//     html.btnVentana.forEach(idVentana => {
+//         idVentana.id
+//         console.log(id)
+//     })
+// }
 
 
 function hotelModal(evt) {
@@ -201,9 +223,9 @@ function hotelModal(evt) {
             
             Swal.fire({
                 title: `${nombre} ${apellido}`,
-                html: `<h2>${nombre} ${apellido} dasd</h2>`,
+                text: `Teléfono ${telefono}`,
                 confirmButtonText: "Aceptar",
-                buttonsStyling: false,
+                // buttonsStyling: false,
 
                 // customClass:{
 
@@ -215,72 +237,16 @@ function hotelModal(evt) {
                 
             })
             
-            html.hotelModal.innerHTML = `<h2>${nombre} ${apellido}</h2>
-            <p>Piso ${pisoN+pisoL}</p>
-            <p>Teléfono ${telefono}</p>
-            <p>Ingreso ${fecha}</p>
-            <p>Egreso ${fechaDeVencimiento}</p>
-            <p>A pagar ${costo}</p>
-            <p>${pago}</p>`
+            // html.hotelModal.innerHTML = `<h2>${nombre} ${apellido}</h2>
+            // <p>Piso ${pisoN+pisoL}</p>
+            // <p>Teléfono ${telefono}</p>
+            // <p>Ingreso ${fecha}</p>
+            // <p>Egreso ${fechaDeVencimiento}</p>
+            // <p>A pagar ${costo}</p>
+            // <p>${pago}</p>`
         }
     })
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// let arrow = document.querySelectorAll(".arrow");
-// for (var i = 0; i < arrow.length; i++) {
-// arrow[i].addEventListener("click", (e)=>{
-// let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
-// arrowParent.classList.toggle("showMenu");
-// });
-// }
-// let sidebar = document.querySelector(".sidebar");
-// let sidebarBtn = document.querySelector(".bx-menu");
-// console.log(sidebarBtn);
-// sidebarBtn.addEventListener("click", ()=>{
-// sidebar.classList.toggle("close");
-// });

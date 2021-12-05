@@ -55,7 +55,7 @@ p, h1, h2, h3, h4, h5, h6 {
     margin: auto;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* box-shadow: 0px 5px 15px 0px rgba(120,120,120,0.69); */
+    box-shadow: 0px 5px 10px 2px rgba(0,0,0,0.1);
 }
 .inner form {
     padding-top: 36px;
@@ -149,9 +149,11 @@ select option[value=""][disabled] {
     background: #333;
     font-size: 15px;
     color: #fff;
+    transition: font-size 0.3s ease;
 }
 .form__btn:hover{
     background: #544179;
+    font-size: 18px;
 }
    
 @media (max-width: 767px) {
@@ -176,11 +178,6 @@ select option[value=""][disabled] {
 
 
 /*********** FORMULARIO FIN **************/
-
-
-button:hover {
-    transform: scale(1.1);
-}
 
 .contenido {
     max-width: 1200px;
@@ -214,85 +211,84 @@ button:hover {
     cursor: pointer;
 }
 
-/*********** FORMULARIO FIN **************/
+/*********** HOTEL FIN **************/
 
-/****** CARD ******/
+/*********** CARD **************/
 .contenedor-card {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
     gap: 2rem;
     max-width: 95%;
     margin: 0 auto;
 }
-.card {
-    color: black;
-    /* border: 0.5px groove black; */
-    /* border-radius: 5px; */
-    line-height: 2;
-    background-color: #1f6e87;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-}
 
-.card h2 {
-    background: rgb(31,110,135);
-    background: linear-gradient(0deg, rgba(31,110,135,1) 0%, rgba(31,110,135,1) 60%, rgba(0,67,90,1) 60%);
-    /* padding-bottom: 3rem; */
-    color: white;
+.card {
+    position: relative;
+    max-width: 35rem;
+    background-color: #fff;
+    border: 1px solid #eee;
     text-align: center;
-    font-size: 3rem;    
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px 2px rgba(0,0,0,0.1);    
 }
-.titulo__imagen {
-    max-width: 91%;
-    color: white;
-    background-color: white;
-    margin: 0 auto;
-  }
-.card h3 {
-    background-color: #00435a;
-    font-weight: normal;
-    padding-left: 2rem;
+.card__imagen img {
+    padding: 2rem 0px 1rem;
+    max-width: 15rem;
+    max-height: 15rem;
+    border-radius: 50%;
 }
-.card img {
-    max-width: 80%;
-    display: block;
-    margin: 0 auto;
+.card__pago {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    background: #888;
+    color: #fff;
+    padding: 5px 8px;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bold;
 }
-.card ul {
-    list-style: none;
-    padding-left: 0;
-    text-align: justify;
-    color: white;
-    /* background-color: white; */
-    max-width: 95%;
-    margin: auto;
-    
+.card__detalles {
+    padding: 1rem 3rem;
 }
-.card li {
+.card__detalles h3 {
+    font-size: 2.5rem;
+    color: #111;
+    margin-bottom: 5px;
+}
+.card__detalles__grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    margin-left: 2rem;
+    padding: 2.5rem 3rem;
+    gap: 3rem;
+    
 }
-.card li:last-child {
-    display: block;
-    text-align: center;
+.card__items p {
+    font-size: 14px;
+    margin-bottom: 2px;
+    color: #555;
 }
-.tachito {
-    /* text-align: end; */
-    display: flex;
-    justify-content: end;
-    /* align-items: center; */
-    background-color: #569cb7;
-    padding: 1rem 0;
-
+.card__items :last-child {
+    font-size: 18px;
+    color: #444;
+    font-weight: bold;
 }
-.material-icons.md-36 { 
-    font-size: 3rem;
-    /* display: block; */
-    margin-right: 2rem;
+.card button {
+    width: 80%;
+    padding: 1rem;
+    margin-bottom: 1rem;
     cursor: pointer;
-    text-align: end;
-    color: rgb(161, 48, 48);
-    background-color: #569cb7;
+    outline: none;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 5px;
+    background: #111;
+    color: white;
+    transition: font-size 0.3s ease;
+}
+.card button:hover {
+    font-size: 17px;
 }
 
-
+/*********** CARD FIN**************/
