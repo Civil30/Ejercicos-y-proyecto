@@ -2,8 +2,10 @@ const costoPorDia = 20;
 const costoPorDiaAlta = 35;
 const pisos = [1, 2, 3, 4, 5];
 const letras = ["A", "B", "C", "D", "E"];
-const vecinos = JSON.parse(localStorage.getItem("data")) || [];
-
+let vecinos = JSON.parse(localStorage.getItem("data"));
+if(!vecinos) {
+    vecinos = []
+}
 
 const html = {
     //Menú de navegación
@@ -68,34 +70,46 @@ for (const letra of letras) {
 //Eventos
 html.formulario.addEventListener("submit", crear);
 // html.btnMostrar.addEventListener("click", mostrarInquilinos);
-// html.btnVentanas.addEventListener("click", mostrarInquilinosModal)
-// html.btnVentanas.addEventListener("click", relacionar)
+html.btnVentanas.addEventListener("click", hotelModal)
 html.inputDias.addEventListener("input", fechaDeVencimiento);
+html.inputTemporada.addEventListener("change", calcularPrecio)
 html.btnForm.addEventListener("click", cargarFormulario)
 html.btnHotel.addEventListener("click", cargarHotel)
 html.btnControl.addEventListener("click", cargarControl)
 html.inputPago.addEventListener("change", tomarPago)
 
 
-
+//Funciones
 function crear (evt) {
     // evt.preventDefault();    
     const id = vecinos.length + 1;
     const nombre = html.inputNombre.value;
     const apellido = html.inputApellido.value;
-    const pisoN = html.inputPisoN.value;
-    const pisoL = html.inputPisoL.value;
+    const pisoNumero = html.inputPisoN.value;
+    const pisoLetra = html.inputPisoL.value;
     const telefono = html.inputTelefono.value;
     const fecha = html.inputFecha.value;
     const fechaDeVencimiento = html.inputFechaFin.value;
     const temporadaAlta = html.inputTemporada.checked;
     const costo = html.inputCosto.value;
     const pago = html.inputPago.checked;
-
-    vecinosAdd = new Vecino(id, nombre, apellido, pisoN, pisoL, telefono, fecha, fechaDeVencimiento, temporadaAlta, costo, pago);
+    
+    
+    vecinos.forEach( inquilinos => {
+        const {pisoN, pisoL} = inquilinos;
+        if (pisoN + pisoL != pisoNumero + pisoLetra){
+            evt.preventDefault();    
+    
+        }
+        
+        
+    })
+    
+    vecinosAdd = new Vecino(id, nombre, apellido, pisoNumero, pisoLetra, telefono, fecha, fechaDeVencimiento, temporadaAlta, costo, pago);
     vecinos.push(vecinosAdd)
-
+    
     localStorage.setItem("data", JSON.stringify(vecinos));
+    
 };
 
 function mostrarInquilinos() {
@@ -111,6 +125,12 @@ function mostrarInquilinos() {
        
 };
 
+function calcularPrecio () {
+    html.inputCosto.value = `$ ${costoPorDia * html.inputDias.value}`;
+    if(html.inputTemporada.checked) {
+        html.inputCosto.value = `$ ${costoPorDiaAlta * html.inputDias.value}`;
+    };
+}
 
 function fechaDeVencimiento() {
     const obtenerDias = Number(html.inputDias.value);
@@ -128,13 +148,7 @@ function fechaDeVencimiento() {
     calcularPrecio()
 }
 
-function calcularPrecio () {
-    html.inputCosto.value = `$ ${costoPorDia * html.inputDias.value}`;
-    if(html.inputTemporada.checked) {
-        html.inputCosto.value = `$ ${costoPorDiaAlta * html.inputDias.value}`;
-    };
-    html.inputTemporada.addEventListener("change", calcularPrecio)
-}
+
 
 function tomarPago () {
     html.inputCosto.style["background-color"] = "#e85252"
@@ -176,19 +190,33 @@ function idVentanas(e) {
         // console.log(id)
     })
 }
-function idVecinos() {
-    vecinos.forEach(ele => {
-        const id = ele.pisoN + ele.pisoL
-        console.log(id)
-    })
-}
 
-function relacionar(id) {
-    vecinos.forEach(ele => {
-        const {nombre, apellido, pisoN, pisoL, telefono, fecha, fechaDeVencimiento, costo, pago} = ele;
 
-        if(id == pisoN+pisoL){
+function hotelModal(evt) {
+
+    vecinos.forEach( inquilino => {
+        const { nombre, apellido, pisoN, pisoL, telefono, fecha, fechaDeVencimiento, costo, pago } = inquilino;
+        const idVecino = pisoN + pisoL
+        if ( evt.target.id == idVecino ) {
+            
+            Swal.fire({
+                title: `${nombre} ${apellido}`,
+                html: `<h2>${nombre} ${apellido} dasd</h2>`,
+                confirmButtonText: "Aceptar",
+                buttonsStyling: false,
+
+                // customClass:{
+
+                //     confirmButton: "form__btn"
+                // }
+                
+                    
+                  
+                
+            })
+            
             html.hotelModal.innerHTML = `<h2>${nombre} ${apellido}</h2>
+            <p>Piso ${pisoN+pisoL}</p>
             <p>Teléfono ${telefono}</p>
             <p>Ingreso ${fecha}</p>
             <p>Egreso ${fechaDeVencimiento}</p>
@@ -196,17 +224,7 @@ function relacionar(id) {
             <p>${pago}</p>`
         }
     })
-
-    if (idVentanas() != idVecinos()) {
-    }
 }
-
-
-html.btnVentanas.addEventListener("click", (e) => {
-    if( relacionar (e.target.id)) return
-})
-
-
 
 
 
