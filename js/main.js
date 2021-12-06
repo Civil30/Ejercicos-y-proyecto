@@ -36,7 +36,11 @@ const html = {
     btnVentana :document.querySelectorAll(".ventana"),
     btnMostrar : document.querySelector("#mostrar"),
     inquilinos : document.querySelector(".contenedor-card"),
-    hotelModal: document.querySelector(".hotel-modal")
+    hotelModal: document.querySelector(".hotel-modal"),
+    
+    
+    acordeon: document.querySelectorAll(".card"),
+    h2: document.querySelectorAll(".h2")
 };
 
 
@@ -112,46 +116,51 @@ function crear (evt) {
     
 };
 
-function mostrarInquilinos() {
+function mostrarInquilinos(e) {
     
     html.inquilinos.innerHTML=" ";
 
     vecinos.forEach( persona => {
         const { nombre, apellido, pisoN, pisoL, telefono, fecha, fechaDeVencimiento, costo, pago } = persona
         const div = document.createElement("DIV");
-        div.classList.add("card");
-        div.innerHTML = `<div class="card__imagen">
-                            <img src="./img/63765.jpg" alt="perfil">
-                        </div>
-                        <div class="card__pago">
-                            <p> ${pago}No Pago</p>
-                        </div>
-                        <div class="card__detalles">
-                            <h3>${nombre} ${apellido}</h3>
-                            <div class="card__detalles__grid">
-                                <div class="card__items">
-                                    <p>Ingreso</p> 
-                                    <p>${fecha}</p>
-                                </div>
-                                <div class="card__items">
-                                    <p>Egreso</p> 
-                                    <p>${fechaDeVencimiento}</p>
-                                </div>
-                                <div class="card__items">
-                                    <p>Teléfono</p> 
-                                    <p>${telefono}</p>
-                                </div>
-                                <div class="card__items">
-                                    <p>Costo</p> 
-                                    <p>${costo}</p>
-                                </div>
-                            </div>    
-                        </div>
-                        <button>Eliminar</button>`
+        div.classList.add("acordeon");
+        div.innerHTML = `<h2 class="h2">Departamento ${pisoN} ${pisoL}</h2>
+                        <div class="card">
+                            <div class="card__imagen">
+                                <img src="./img/63765.jpg" alt="perfil">
+                            </div>
+                            <div class="card__pago">
+                                <p> ${pago}No Pago</p>
+                            </div>
+                            <div class="card__detalles">
+                                <h3>${nombre} ${apellido}</h3>
+                                <div class="card__detalles__grid">
+                                    <div class="card__items">
+                                        <p>Ingreso</p> 
+                                        <p>${fecha}</p>
+                                    </div>
+                                    <div class="card__items">
+                                        <p>Egreso</p> 
+                                        <p>${fechaDeVencimiento}</p>
+                                    </div>
+                                    <div class="card__items">
+                                        <p>Teléfono</p> 
+                                        <p>${telefono}</p>
+                                    </div>
+                                    <div class="card__items">
+                                        <p>Costo</p> 
+                                        <p>${costo}</p>
+                                    </div>
+                                </div>    
+                            </div>
+                            <button>Eliminar</button>
+                        </div>`    
         html.inquilinos.appendChild(div)
+        
     })
-       
 };
+
+
 
 function calcularPrecio () {
     html.inputCosto.value = `$ ${costoPorDia * html.inputDias.value}`;
@@ -248,5 +257,42 @@ function hotelModal(evt) {
     })
 }
 
+// function lala () {
 
+        
+                // html.h2.addEventListener("click", () => {
+                //     console.log("asd")
+                // })
+        
 
+        
+    // html.h2.forEach( titulo =>{
+
+    //     titulo.addEventListener( "click", (e) => {
+    //         const acordeon =  e.target.nextElementSibling
+    //         acordeon.classList.toggle("activo")
+    //     })
+    // })
+      
+    
+// }
+
+function waitForElementToDisplay(selector, time) {
+    if(document.querySelector(selector)!=null) {
+        selector.forEach( titulo =>{
+
+            titulo.addEventListener( "click", (e) => {
+                const acordeon =  e.target.nextElementSibling
+                acordeon.classList.toggle("activo")
+                console.log("hola")
+            })
+        })
+        return;
+    }
+    else {
+        setTimeout(function() {
+            waitForElementToDisplay(selector, time);
+        }, time);
+    }
+}
+waitForElementToDisplay(".card", 500)

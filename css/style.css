@@ -222,6 +222,11 @@ select option[value=""][disabled] {
     margin: 0 auto;
 }
 
+.acordeon .h2 {
+    text-align: center;
+    max-width: 35rem;
+    cursor: pointer;
+}
 .card {
     position: relative;
     max-width: 35rem;
@@ -229,7 +234,13 @@ select option[value=""][disabled] {
     border: 1px solid #eee;
     text-align: center;
     border-radius: 10px;
+    height: 0;
+    overflow: hidden;
+    transition: all 0.5s ease;
     box-shadow: 0px 5px 10px 2px rgba(0,0,0,0.1);    
+}
+.card.activo {
+    height: auto;
 }
 .card__imagen img {
     padding: 2rem 0px 1rem;
@@ -258,7 +269,7 @@ select option[value=""][disabled] {
 }
 .card__detalles__grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 50% 50%;
     padding: 2.5rem 3rem;
     gap: 3rem;
     
