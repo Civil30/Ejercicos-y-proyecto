@@ -237,16 +237,22 @@ function hotelModal(evt) {
         
         if ( evt.target.id == idVecino ) {
             Swal.fire({
-                title: `${pisoN} ${pisoL}`,
-                html: `<h3>${nombre} ${apellido}</h3>                           
-                <p>Desde: ${fecha}</p> 
-                <p>Hasta ${fechaDeVencimiento}</p> 
-                <p>Teléfono: ${telefono}</p> 
-                <p>Costo ${costo}</p>
-                <p>${pago}</p>`, 
+                html: `<div class="sweet-modal">
+                            <h2 class="sweet-piso">${pisoN} ${pisoL}
+                            <div class="card__imagen">
+                                <img src="./img/63765.jpg" alt="perfil">
+                            </div>    
+                            <h3 class="sweet-nombre">${nombre} ${apellido}</h3>                           
+                            <p class="sweet-texto">Desde: ${fecha}</p> 
+                            <p class="sweet-texto">Hasta: ${fechaDeVencimiento}</p> 
+                            <p class="sweet-texto">Teléfono: ${telefono}</p> 
+                            <p class="sweet-texto">Costo ${costo}</p>
+                        </div>`,
                 confirmButtonText: "Aceptar",
+                footer: `<b>${pago}</b>`,
                 customClass: {
-                    title: ".sarasa"
+                    image: '...',
+                    confirmButton: '...'     
                 }
             })   
         }
