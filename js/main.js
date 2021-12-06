@@ -121,16 +121,21 @@ function mostrarInquilinos(e) {
     html.inquilinos.innerHTML=" ";
 
     vecinos.forEach( persona => {
-        const { nombre, apellido, pisoN, pisoL, telefono, fecha, fechaDeVencimiento, costo, pago } = persona
+        let { nombre, apellido, pisoN, pisoL, telefono, fecha, fechaDeVencimiento, costo, pago } = persona
+        if(pago){
+            pago = "Pago"
+        } else {
+            pago = "No Pago"
+        }
         const div = document.createElement("DIV");
         div.classList.add("acordeon");
-        div.innerHTML = `<h2 class="h2">Departamento ${pisoN} ${pisoL}</h2>
-                        <div class="card">
+        div.innerHTML = `<div class="card">
+                            <h2 class="h2">Departamento ${pisoN} ${pisoL}</h2>
                             <div class="card__imagen">
                                 <img src="./img/63765.jpg" alt="perfil">
                             </div>
                             <div class="card__pago">
-                                <p> ${pago}No Pago</p>
+                                <p> ${pago}</p>
                             </div>
                             <div class="card__detalles">
                                 <h3>${nombre} ${apellido}</h3>
@@ -155,9 +160,9 @@ function mostrarInquilinos(e) {
                             </div>
                             <button>Eliminar</button>
                         </div>`    
-        html.inquilinos.appendChild(div)
         
-    })
+        html.inquilinos.appendChild(div)    
+    })  
 };
 
 
@@ -226,73 +231,58 @@ function cargarControl () {
 function hotelModal(evt) {
 
     vecinos.forEach( inquilino => {
-        const { nombre, apellido, pisoN, pisoL, telefono, fecha, fechaDeVencimiento, costo, pago } = inquilino;
-        const idVecino = pisoN + pisoL
+        let { nombre, apellido, pisoN, pisoL, telefono, fecha, fechaDeVencimiento, costo, pago } = inquilino;
+        const idVecino = pisoN + pisoL;
+        pago ? pago = "Pago recibido" : pago = "Pago no recibido";
+        
         if ( evt.target.id == idVecino ) {
-            
             Swal.fire({
-                title: `${nombre} ${apellido}`,
-                text: `Teléfono ${telefono}`,
+                title: `${pisoN} ${pisoL}`,
+                html: `<h3>${nombre} ${apellido}</h3>                           
+                <p>Desde: ${fecha}</p> 
+                <p>Hasta ${fechaDeVencimiento}</p> 
+                <p>Teléfono: ${telefono}</p> 
+                <p>Costo ${costo}</p>
+                <p>${pago}</p>`, 
                 confirmButtonText: "Aceptar",
-                // buttonsStyling: false,
-
-                // customClass:{
-
-                //     confirmButton: "form__btn"
-                // }
-                
-                    
-                  
-                
-            })
-            
-            // html.hotelModal.innerHTML = `<h2>${nombre} ${apellido}</h2>
-            // <p>Piso ${pisoN+pisoL}</p>
-            // <p>Teléfono ${telefono}</p>
-            // <p>Ingreso ${fecha}</p>
-            // <p>Egreso ${fechaDeVencimiento}</p>
-            // <p>A pagar ${costo}</p>
-            // <p>${pago}</p>`
+                customClass: {
+                    title: ".sarasa"
+                }
+            })   
         }
     })
 }
 
-// function lala () {
-
-        
-                // html.h2.addEventListener("click", () => {
-                //     console.log("asd")
-                // })
         
 
-        
+ 
     // html.h2.forEach( titulo =>{
 
     //     titulo.addEventListener( "click", (e) => {
-    //         const acordeon =  e.target.nextElementSibling
+    //         const acordeon = await  e.target.nextElementSibling
     //         acordeon.classList.toggle("activo")
     //     })
     // })
       
     
+
+
+// function waitForElementToDisplay(selector, time) {
+//     if(document.querySelector(selector)!=null) {
+//         selector.forEach( titulo =>{
+
+//             titulo.addEventListener( "click", (e) => {
+//                 const acordeon =  e.target.nextElementSibling
+//                 acordeon.classList.toggle("activo")
+//                 console.log("hola")
+//             })
+//         })
+//         return;
+//     }
+//     else {
+//         setTimeout(function() {
+//             waitForElementToDisplay(selector, time);
+//         }, time);
+//     }
 // }
-
-function waitForElementToDisplay(selector, time) {
-    if(document.querySelector(selector)!=null) {
-        selector.forEach( titulo =>{
-
-            titulo.addEventListener( "click", (e) => {
-                const acordeon =  e.target.nextElementSibling
-                acordeon.classList.toggle("activo")
-                console.log("hola")
-            })
-        })
-        return;
-    }
-    else {
-        setTimeout(function() {
-            waitForElementToDisplay(selector, time);
-        }, time);
-    }
-}
-waitForElementToDisplay(".card", 500)
+// waitForElementToDisplay(".card", 500)

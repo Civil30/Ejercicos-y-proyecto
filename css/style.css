@@ -16,6 +16,28 @@ body {
 
 }
 
+/*************NAVEGACION*************/
+.navegacion {
+    max-width: 100vw;
+    background-color: rgba(0,0,0,0.5);
+    padding: 1.5rem;
+}
+.navegacion__buttons {
+    /* background-color: burlywood; */
+    max-width: 90rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+.navegacion button {
+    padding: 5px;
+    border: none;
+    background-color: transparent;
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+}
 
 
 /*********** FORMULARIO **************/
@@ -224,8 +246,12 @@ select option[value=""][disabled] {
 
 .acordeon .h2 {
     text-align: center;
-    max-width: 35rem;
-    cursor: pointer;
+    padding: 1rem 0 0.5rem 0;
+    /* border-bottom: 1px groove #eee; */
+    /* cursor: pointer; */
+}
+.sarasa {
+    color: red;
 }
 .card {
     position: relative;
@@ -234,23 +260,23 @@ select option[value=""][disabled] {
     border: 1px solid #eee;
     text-align: center;
     border-radius: 10px;
-    height: 0;
-    overflow: hidden;
+    /* height: 0; */
+    /* overflow: hidden; */
     transition: all 0.5s ease;
     box-shadow: 0px 5px 10px 2px rgba(0,0,0,0.1);    
 }
-.card.activo {
+/* .card.activo {
     height: auto;
-}
+} */
 .card__imagen img {
     padding: 2rem 0px 1rem;
     max-width: 15rem;
-    max-height: 15rem;
+    max-height: auto;
     border-radius: 50%;
 }
 .card__pago {
     position: absolute;
-    top: 1.5rem;
+    top: 5.5rem;
     left: 1.5rem;
     background: #888;
     color: #fff;
@@ -299,7 +325,7 @@ select option[value=""][disabled] {
     transition: font-size 0.3s ease;
 }
 .card button:hover {
-    font-size: 17px;
+    font-size: 16px;
 }
 
 /*********** CARD FIN**************/
