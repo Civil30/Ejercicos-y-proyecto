@@ -1,23 +1,19 @@
 const costoPorDia = 20;
 const costoPorDiaAlta = 35;
-const pisos = [1, 2, 3, 4, 5];
-const letras = ["A", "B", "C", "D", "E"];
-let vecinos = JSON.parse(localStorage.getItem("data"));
-if(!vecinos) {
-    vecinos = []
-}
+const pisos = {
+    numeros: [1, 2, 3, 4, 5],
+    letras : ["A", "B", "C", "D", "E"]
+};
+const vecinos = JSON.parse(localStorage.getItem("data")) || [];
+// if(!vecinos) {
+//     vecinos = []
+// }
 
 const html = {
-    body : document.querySelector("body"),
     //Menú de navegación
-    // menu : document.querySelector("#menu"),
     menu : document.querySelectorAll(".btn-menu"),
-    btnControl: document.querySelector("#btn-control"),
-    btnForm : document.querySelector("#btn-form"),
-    btnHotel : document.querySelector("#btn-hotel"),
-    formularioDisplay : document.querySelector("#formulario-display"),
-    cardDisplay: document.querySelector("#card-display"),
-    hotelDisplay : document.querySelector("#hotel-display"),
+    activo: document.querySelectorAll(".display"),
+    
     //Formulario de Registro
     formulario : document.querySelector("#formulario"),
     inputNombre : document.querySelector("#nombre"),
@@ -33,19 +29,18 @@ const html = {
     inputPago : document.querySelector("#pago-checkbox"),
     btnRegistro : document.querySelector("#btnRegistro"),
     
+    //Hotel
     btnVentanas :document.querySelector(".ventanas"),
     btnVentana :document.querySelectorAll(".ventana"),
+    
+    //Panel de control
     btnMostrar : document.querySelector("#mostrar"),
     inquilinos : document.querySelector(".contenedor-card"),
-    hotelModal : document.querySelector(".hotel-modal"),
     
-    
+    //Probando algo
     acordeon: document.querySelectorAll(".card"),
     h2: document.querySelectorAll(".h2")
 };
-
-
-
 
 class Vecino {
     constructor (id, nombre, apellido, pisoN, pisoL, telefono, fecha, fechaDeVencimiento, temporadaAlta, costo, pago){
@@ -63,14 +58,12 @@ class Vecino {
     }
 };
 
-for (const piso of pisos) {
-    const option = document.createElement("OPTION");
-    option.textContent = piso
-    html.inputPisoN.appendChild(option)
-};
-for (const letra of letras) {
-    html.inputPisoL.innerHTML += `<option>${letra}</option>`    
-};
+for(const numero of pisos.numeros) {
+    html.inputPisoN.innerHTML += `<option>${numero}</option>` 
+}
+for(const letra of pisos.letras) {
+    html.inputPisoL.innerHTML += `<option>${letra}</option>` 
+}
 
 //Eventos
 html.formulario.addEventListener("submit", crear);
@@ -78,11 +71,10 @@ html.btnMostrar.addEventListener("click", mostrarInquilinos);
 html.btnVentanas.addEventListener("click", hotelModal)
 html.inputDias.addEventListener("input", fechaDeVencimiento);
 html.inputTemporada.addEventListener("change", calcularPrecio)
-html.btnForm.addEventListener("click", cargarFormulario)
-html.btnHotel.addEventListener("click", cargarHotel)
-html.btnControl.addEventListener("click", cargarControl)
+// html.btnForm.addEventListener("click", cargarFormulario)
+// html.btnHotel.addEventListener("click", cargarHotel)
+// html.btnControl.addEventListener("click", cargarControl)
 html.inputPago.addEventListener("change", tomarPago)
-
 
 //Funciones
 function crear (evt) {
@@ -97,8 +89,8 @@ function crear (evt) {
     const fechaDeVencimiento = html.inputFechaFin.value;
     const temporadaAlta = html.inputTemporada.checked;
     const costo = html.inputCosto.value;
-    const pago = html.inputPago.checked;
-    
+    const pagoTexto = html.inputPago.checked ? "Pago" : "No pago";
+    const pago = pagoTexto
     
     // vecinos.forEach( inquilinos => {
     //     const {pisoN, pisoL} = inquilinos;
@@ -117,17 +109,13 @@ function crear (evt) {
     
 };
 
-function mostrarInquilinos(e) {
+function mostrarInquilinos() {
     
-    html.inquilinos.innerHTML=" ";
+    html.inquilinos.innerHTML = " ";
 
     vecinos.forEach( persona => {
-        let { nombre, apellido, pisoN, pisoL, telefono, fecha, fechaDeVencimiento, costo, pago } = persona
-        if(pago){
-            pago = "Pago"
-        } else {
-            pago = "No Pago"
-        }
+        const { nombre, apellido, pisoN, pisoL, telefono, fecha, fechaDeVencimiento, costo, pago } = persona;
+
         const div = document.createElement("DIV");
         div.classList.add("acordeon");
         div.innerHTML = `<div class="card">
@@ -160,19 +148,25 @@ function mostrarInquilinos(e) {
                                 </div>    
                             </div>
                             <button>Eliminar</button>
-                        </div>`    
+                        </div>`;    
         
-        html.inquilinos.appendChild(div)    
+        html.inquilinos.appendChild(div);    
     })  
 };
 
 
 
 function calcularPrecio () {
-    html.inputCosto.value = `$ ${costoPorDia * html.inputDias.value}`;
-    if(html.inputTemporada.checked) {
-        html.inputCosto.value = `$ ${costoPorDiaAlta * html.inputDias.value}`;
-    };
+    const precioPorDia = html.inputTemporada.checked
+        ? `$ ${costoPorDiaAlta * html.inputDias.value}`
+        : `$ ${costoPorDia * html.inputDias.value}`;
+    html.inputCosto.value =  precioPorDia;
+    
+    //De la anterior manera
+    // html.inputCosto.value = `$ ${costoPorDia * html.inputDias.value}`;
+    // if(html.inputTemporada.checked) {
+    //     html.inputCosto.value = `$ ${costoPorDiaAlta * html.inputDias.value}`;
+    // };
 }
 
 function fechaDeVencimiento() {
@@ -188,45 +182,58 @@ function fechaDeVencimiento() {
     
     html.inputFechaFin.value = `${separarFecha.año}-${separarFecha.mes}-${separarFecha.dia}`;
 
-    calcularPrecio()
+    calcularPrecio();
 }
 
 
 
 function tomarPago () {
-    html.inputCosto.style["background-color"] = "#e85252"
-    if (html.inputPago.checked) {
-        html.inputCosto.style["background-color"] = "#0a66c2";
-    }
+    const inputColor = html.inputPago.checked ? "#0a66c2" : "#e85252";
+    html.inputCosto.style["background-color"] = inputColor;
+    
+    //De la anterior manera
+    // html.inputCosto.style["background-color"] = "#e85252"
+    // if (html.inputPago.checked) {
+    //     html.inputCosto.style["background-color"] = "#0a66c2";
+    // }
 }
 
-function cargarFormulario () {
-    // document.body.style["background-color"] = "#BEAEE2";
-    html.hotelDisplay.style.display = "none";
-    html.cardDisplay.style.display = "none";
-    html.formularioDisplay.style.display = "block";
-}
+html.menu.forEach((btn, indiceBtn) => {
+    
+    btn.addEventListener("click", () => {
+        html.activo.forEach((bloque, indiceBloque) => {
+            bloque.style.display = "none";
+        })
+        html.activo[indiceBtn].style.display = "block";
+    }) 
+})
 
-function cargarHotel () {
-    // document.querySelector("body").style["background-image"] = "url(../img/casas.png)"
-    html.formularioDisplay.style.display = "none";
-    html.cardDisplay.style.display = "none";
-    html.hotelDisplay.style.display = "block";
-}
+// function cargarFormulario () {
+//     // document.body.style["background-color"] = "#BEAEE2";
+//     html.hotelDisplay.style.display = "none";
+//     html.cardDisplay.style.display = "none";
+//     html.formularioDisplay.style.display = "block";
+// }
 
-function cargarControl () {
-    html.body.style["background-image"] = "none";
-    html.formularioDisplay.style.display = "none";
-    html.hotelDisplay.style.display = "none";
-    html.cardDisplay.style.display = "block";
-}
+// function cargarHotel () {
+//     // document.querySelector("body").style["background-image"] = "url(../img/casas.png)"
+//     html.formularioDisplay.style.display = "none";
+//     html.cardDisplay.style.display = "none";
+//     html.hotelDisplay.style.display = "block";
+// }
+
+// function cargarControl () {
+//     html.body.style["background-image"] = "none";
+//     html.formularioDisplay.style.display = "none";
+//     html.hotelDisplay.style.display = "none";
+//     html.cardDisplay.style.display = "block";
+// }
 
 function hotelModal(evt) {
 
     vecinos.forEach( inquilino => {
-        let { nombre, apellido, pisoN, pisoL, telefono, fecha, fechaDeVencimiento, costo, pago } = inquilino;
+        const { nombre, apellido, pisoN, pisoL, telefono, fecha, fechaDeVencimiento, costo, pago } = inquilino;
         const idVecino = pisoN + pisoL;
-        pago ? pago = "Pago recibido" : pago = "Pago no recibido";
         
         if ( evt.target.id == idVecino ) {
             Swal.fire({
@@ -252,13 +259,13 @@ function hotelModal(evt) {
     })
 }
 
-        
+       
 
  
     // html.h2.forEach( titulo =>{
 
     //     titulo.addEventListener( "click", (e) => {
-    //         const acordeon = await  e.target.nextElementSibling
+    //         const acordeon = e.target.nextElementSibling
     //         acordeon.classList.toggle("activo")
     //     })
     // })
