@@ -8,12 +8,14 @@ body {
     font-family: 'Ubuntu', sans-serif;
     margin: 0;
     background-repeat: no-repeat;
-    background-image: url(../img/pngwing.com.png);
+    background-image: url(../img/vector.png);
     background-size: contain;
-    /* background-size: cover; */
+    background-size: cover;
+    width: 100%;
+    height: auto;
     background-position: center center;
     /* backdrop-filter: blur(10px); */
-	/* background-color: #BEAEE2; */
+	background-color: #BEAEE2;
     font-size: 1.6rem;
 
 }
@@ -197,7 +199,7 @@ select option[value=""][disabled] {
     }
 }
 #formulario-display {
-    display: none;
+    display: block;
 }
 
 
@@ -211,22 +213,22 @@ select option[value=""][disabled] {
 #hotel-display {
     display: none;
     margin: 0 auto;
-    min-height: 67rem;
-    background-image: url(../img/hotel2.png);
+    min-height: 90rem;
+    background-image: url(../img/hotel.png);
     background-size: auto 100%;
     background-repeat: no-repeat;
     background-position: center center;
 }
 
 .ventanas {
-    padding-top: 18.5rem;
+    padding-top: 25rem;
     display: grid;
-    width: 23.5rem;
+    width: 31.5rem;
     /* height: 95vh; */
     margin: 0 auto;
     grid-template-columns: repeat(5, 1fr);
-    row-gap: 33px;
-    column-gap: 19px;
+    row-gap: 49px;
+    column-gap: 30px;
     /* height: 20rem; */
     /* background-color: rgba(0,0,0,0.3); */
 }
@@ -234,14 +236,17 @@ select option[value=""][disabled] {
 .ventana {
     background-color: transparent;
     border: none;
-    width: 2rem;
-    height: 4rem;
+    width: 3rem;
+    height: 5rem;
     cursor: pointer;
 }
 
 /*********** HOTEL FIN **************/
 
 /*********** CARD **************/
+#card-display {
+    display: none;
+}
 .contenedor-card {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
@@ -334,9 +339,7 @@ select option[value=""][disabled] {
 }
 
 /*********** CARD FIN**************/
-/* .sweet-modal {
-    line-height: 4rem;
-} */
+
 .sweet-piso {
     font-size: 4rem;
 }

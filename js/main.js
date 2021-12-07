@@ -8,6 +8,7 @@ if(!vecinos) {
 }
 
 const html = {
+    body : document.querySelector("body"),
     //Menú de navegación
     // menu : document.querySelector("#menu"),
     menu : document.querySelectorAll(".btn-menu"),
@@ -25,7 +26,7 @@ const html = {
     inputPisoL : document.querySelector("#pisoL"),
     inputTelefono: document.querySelector("#telefono"),
     inputFecha : document.querySelector("#fecha"),
-    inputDias:  document.querySelector("#dias"),
+    inputDias : document.querySelector("#dias"),
     inputFechaFin : document.querySelector("#fecha-fin"),
     inputTemporada: document.querySelector("#temporada-checkbox"),
     inputCosto: document.querySelector("#input-costo"),
@@ -36,7 +37,7 @@ const html = {
     btnVentana :document.querySelectorAll(".ventana"),
     btnMostrar : document.querySelector("#mostrar"),
     inquilinos : document.querySelector(".contenedor-card"),
-    hotelModal: document.querySelector(".hotel-modal"),
+    hotelModal : document.querySelector(".hotel-modal"),
     
     
     acordeon: document.querySelectorAll(".card"),
@@ -207,26 +208,18 @@ function cargarFormulario () {
 }
 
 function cargarHotel () {
+    // document.querySelector("body").style["background-image"] = "url(../img/casas.png)"
     html.formularioDisplay.style.display = "none";
     html.cardDisplay.style.display = "none";
     html.hotelDisplay.style.display = "block";
 }
 
 function cargarControl () {
-    // document.body.style["background-color"] = "white";
+    html.body.style["background-image"] = "none";
     html.formularioDisplay.style.display = "none";
     html.hotelDisplay.style.display = "none";
     html.cardDisplay.style.display = "block";
 }
-
-
-// function idVentanas(e) {
-//     html.btnVentana.forEach(idVentana => {
-//         idVentana.id
-//         console.log(id)
-//     })
-// }
-
 
 function hotelModal(evt) {
 
