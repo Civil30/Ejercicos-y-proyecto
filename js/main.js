@@ -43,12 +43,11 @@ const html = {
 };
 
 class Vecino {
-    constructor (id, nombre, apellido, pisoN, pisoL, telefono, fecha, fechaDeVencimiento, temporadaAlta, costo, pago){
+    constructor (id, nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, temporadaAlta, costo, pago){
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.pisoN = pisoN;
-        this.pisoL = pisoL;
+        this.departamento = departamento;
         this.telefono = telefono;
         this.fecha = fecha;
         this.fechaDeVencimiento = fechaDeVencimiento;
@@ -84,6 +83,7 @@ function crear (evt) {
     const apellido = html.inputApellido.value;
     const pisoNumero = html.inputPisoN.value;
     const pisoLetra = html.inputPisoL.value;
+    const departamento = `${pisoNumero} - ${pisoLetra}`;
     const telefono = html.inputTelefono.value;
     const fecha = html.inputFecha.value;
     const fechaDeVencimiento = html.inputFechaFin.value;
@@ -101,8 +101,7 @@ function crear (evt) {
         
         
     // })
-    
-    vecinosAdd = new Vecino(id, nombre, apellido, pisoNumero, pisoLetra, telefono, fecha, fechaDeVencimiento, temporadaAlta, costo, pago);
+    vecinosAdd = new Vecino(id, nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, temporadaAlta, costo, pago);
     vecinos.push(vecinosAdd)
     
     localStorage.setItem("data", JSON.stringify(vecinos));
@@ -114,12 +113,12 @@ function mostrarInquilinos() {
     html.inquilinos.innerHTML = " ";
 
     vecinos.forEach( persona => {
-        const { nombre, apellido, pisoN, pisoL, telefono, fecha, fechaDeVencimiento, costo, pago } = persona;
+        const { nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, costo, pago } = persona;
 
         const div = document.createElement("DIV");
         div.classList.add("acordeon");
         div.innerHTML = `<div class="card">
-                            <h2 class="h2">Departamento ${pisoN} ${pisoL}</h2>
+                            <h2 class="h2">Departamento ${departamento}</h2>
                             <div class="card__imagen">
                                 <img src="./img/63765.jpg" alt="perfil">
                             </div>
@@ -232,13 +231,12 @@ html.menu.forEach((btn, indiceBtn) => {
 function hotelModal(evt) {
 
     vecinos.forEach( inquilino => {
-        const { nombre, apellido, pisoN, pisoL, telefono, fecha, fechaDeVencimiento, costo, pago } = inquilino;
-        const idVecino = pisoN + pisoL;
+        const { nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, costo, pago } = inquilino;
         
-        if ( evt.target.id == idVecino ) {
+        if ( evt.target.id == departamento ) {
             Swal.fire({
                 html: `<div class="sweet-modal">
-                            <h2 class="sweet-piso">${pisoN} ${pisoL}
+                            <h2 class="sweet-piso">${departamento}
                             <div class="card__imagen">
                                 <img src="./img/63765.jpg" alt="perfil">
                             </div>    
