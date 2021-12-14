@@ -4,7 +4,7 @@ const pisos = {
     numeros: [1, 2, 3, 4, 5],
     letras : ["A", "B", "C", "D", "E"]
 };
-const vecinos = JSON.parse(localStorage.getItem("data")) || [];
+let vecinos = JSON.parse(localStorage.getItem("data")) || [];
 // if(!vecinos) {
 //     vecinos = []
 // }
@@ -35,11 +35,8 @@ const html = {
     
     //Panel de control
     btnMostrar : document.querySelector("#mostrar"),
+    btnEliminarTodos : document.querySelector("#eliminar-todos"),
     inquilinos : document.querySelector(".contenedor-card"),
-    
-    //Probando algo
-    acordeon: document.querySelectorAll(".card"),
-    h2: document.querySelectorAll(".h2")
 };
 
 class Vecino {
@@ -67,6 +64,7 @@ for(const letra of pisos.letras) {
 //Eventos
 html.formulario.addEventListener("submit", crear);
 html.btnMostrar.addEventListener("click", mostrarInquilinos);
+html.btnEliminarTodos.addEventListener("click", eliminarTodos);
 html.btnVentanas.addEventListener("click", hotelModal)
 html.inputDias.addEventListener("input", fechaDeVencimiento);
 html.inputTemporada.addEventListener("change", calcularPrecio)
@@ -113,7 +111,7 @@ function mostrarInquilinos() {
     html.inquilinos.innerHTML = " ";
 
     vecinos.forEach( persona => {
-        const { nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, costo, pago } = persona;
+        const { id, nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, costo, pago } = persona;
 
         const div = document.createElement("DIV");
         div.classList.add("acordeon");
@@ -146,26 +144,39 @@ function mostrarInquilinos() {
                                     </div>
                                 </div>    
                             </div>
-                            <button>Eliminar</button>
+                            <button onclick="elimination(${id})" id="${id}">Eliminar</button>
                         </div>`;    
         
-        html.inquilinos.appendChild(div);    
-    })  
+        html.inquilinos.appendChild(div);
+             
+        // document.getElementById(id).addEventListener("click", eliminarInquilino)   
+    }) 
 };
 
+function eliminarTodos () {
+    localStorage.clear()
+    location.reload()
+}
 
+function elimination(id){
+    vecinos = vecinos.filter( inquilino => inquilino.id !== id )   
+    // vecinos = nuevo
+    localStorage.setItem("data", JSON.stringify(vecinos));
+    mostrarInquilinos()
+}
+
+// function eliminarInquilino (evt) {
+//     console.log(evt.target) 
+//     vecinos.splice(evt.target)
+//     localStorage.setItem("data", JSON.stringify(vecinos));
+//     mostrarInquilinos()    
+// }
 
 function calcularPrecio () {
     const precioPorDia = html.inputTemporada.checked
         ? `$ ${costoPorDiaAlta * html.inputDias.value}`
         : `$ ${costoPorDia * html.inputDias.value}`;
     html.inputCosto.value =  precioPorDia;
-    
-    //De la anterior manera
-    // html.inputCosto.value = `$ ${costoPorDia * html.inputDias.value}`;
-    // if(html.inputTemporada.checked) {
-    //     html.inputCosto.value = `$ ${costoPorDiaAlta * html.inputDias.value}`;
-    // };
 }
 
 function fechaDeVencimiento() {
@@ -189,12 +200,6 @@ function fechaDeVencimiento() {
 function tomarPago () {
     const inputColor = html.inputPago.checked ? "#0a66c2" : "#e85252";
     html.inputCosto.style["background-color"] = inputColor;
-    
-    //De la anterior manera
-    // html.inputCosto.style["background-color"] = "#e85252"
-    // if (html.inputPago.checked) {
-    //     html.inputCosto.style["background-color"] = "#0a66c2";
-    // }
 }
 
 html.menu.forEach((btn, indiceBtn) => {
@@ -258,7 +263,11 @@ function hotelModal(evt) {
 }
 
        
-
+    // function acordeon (evt) {
+    //     const acordeon = evt.target.nextElementSibling
+    //     acordeon.classList.toggle("activo")
+        
+    // }
  
     // html.h2.forEach( titulo =>{
 
@@ -267,26 +276,3 @@ function hotelModal(evt) {
     //         acordeon.classList.toggle("activo")
     //     })
     // })
-      
-    
-
-
-// function waitForElementToDisplay(selector, time) {
-//     if(document.querySelector(selector)!=null) {
-//         selector.forEach( titulo =>{
-
-//             titulo.addEventListener( "click", (e) => {
-//                 const acordeon =  e.target.nextElementSibling
-//                 acordeon.classList.toggle("activo")
-//                 console.log("hola")
-//             })
-//         })
-//         return;
-//     }
-//     else {
-//         setTimeout(function() {
-//             waitForElementToDisplay(selector, time);
-//         }, time);
-//     }
-// }
-// waitForElementToDisplay(".card", 500)

@@ -228,7 +228,7 @@ select option[value=""][disabled] {
     margin: 0 auto;
     grid-template-columns: repeat(5, 1fr);
     row-gap: 49px;
-    column-gap: 30px;
+    column-gap: 28px;
     /* height: 20rem; */
     /* background-color: rgba(0,0,0,0.3); */
 }
@@ -272,7 +272,7 @@ select option[value=""][disabled] {
     border-radius: 10px;
     /* height: 0; */
     /* overflow: hidden; */
-    transition: all 0.5s ease;
+    /* transition: height 0.5s ease; */
     box-shadow: 0px 5px 10px 2px rgba(0,0,0,0.1);    
 }
 /* .card.activo {
@@ -283,6 +283,7 @@ select option[value=""][disabled] {
     max-width: 15rem;
     max-height: auto;
     border-radius: 50%;
+
 }
 .card__pago {
     position: absolute;
@@ -294,31 +295,37 @@ select option[value=""][disabled] {
     border-radius: 5px;
     font-size: 15px;
     font-weight: bold;
+
 }
 .card__detalles {
     padding: 1rem 3rem;
+
 }
 .card__detalles h3 {
     font-size: 2.5rem;
     color: #111;
     margin-bottom: 5px;
+
 }
 .card__detalles__grid {
     display: grid;
     grid-template-columns: 50% 50%;
     padding: 2.5rem 3rem;
     gap: 3rem;
+
     
 }
 .card__items p {
     font-size: 14px;
     margin-bottom: 2px;
     color: #555;
+
 }
 .card__items :last-child {
     font-size: 18px;
     color: #444;
     font-weight: bold;
+
 }
 .card button {
     width: 80%;
@@ -333,9 +340,11 @@ select option[value=""][disabled] {
     background: #111;
     color: white;
     transition: background-color 0.2s ease;
+
 }
 .card button:hover {
     background-color: #444;
+
 }
 
 /*********** CARD FIN**************/
