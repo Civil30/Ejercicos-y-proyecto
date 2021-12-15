@@ -5,9 +5,6 @@ const pisos = {
     letras : ["A", "B", "C", "D", "E"]
 };
 let vecinos = JSON.parse(localStorage.getItem("data")) || [];
-// if(!vecinos) {
-//     vecinos = []
-// }
 
 const html = {
     //Menú de navegación
@@ -40,7 +37,7 @@ const html = {
 };
 
 class Vecino {
-    constructor (id, nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, temporadaAlta, costo, pago){
+    constructor (id, nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, temporadaAlta, costo, pago, img) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -51,6 +48,7 @@ class Vecino {
         this.temporadaAlta = temporadaAlta;
         this.costo = costo;
         this.pago = pago;
+        this.img = img;
     }
 };
 
@@ -74,8 +72,8 @@ html.inputTemporada.addEventListener("change", calcularPrecio)
 html.inputPago.addEventListener("change", tomarPago)
 
 //Funciones
-function crear (evt) {
-    // evt.preventDefault();    
+async function crear (evt) {
+    evt.preventDefault();    
     const id = vecinos.length + 1;
     const nombre = html.inputNombre.value;
     const apellido = html.inputApellido.value;
@@ -88,37 +86,48 @@ function crear (evt) {
     const temporadaAlta = html.inputTemporada.checked;
     const costo = html.inputCosto.value;
     const pagoTexto = html.inputPago.checked ? "Pago" : "No pago";
-    const pago = pagoTexto
+    const pago = pagoTexto;
+    const seed = nombre + apellido;
+    const apiUrl = `https://avatars.dicebear.com/api/adventurer-neutral/${seed}.svg`;
+    const img = await obtenerImg(apiUrl)
     
-    // vecinos.forEach( inquilinos => {
-    //     const {pisoN, pisoL} = inquilinos;
-    //     if (pisoN + pisoL == pisoNumero + pisoLetra){
-    //         evt.preventDefault();    
-    
-    //     }
-        
-        
-    // })
-    vecinosAdd = new Vecino(id, nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, temporadaAlta, costo, pago);
+    vecinos.find( inquilino => {
+        if(inquilino.departamento == departamento) {
+            console.log("ya hay uno")
+            return
+        }
+    })
+
+    vecinosAdd = new Vecino(id, nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, temporadaAlta, costo, pago, img);
     vecinos.push(vecinosAdd)
     
     localStorage.setItem("data", JSON.stringify(vecinos));
     
 };
 
+async function obtenerImg(apiUrl) {
+    try {
+        let res = await fetch(apiUrl);
+        if(!res.ok) throw(res.status)
+        return res.url
+    }catch (err) {
+        console.log("Ocurrió un error:",err)
+    }
+}
+
 function mostrarInquilinos() {
     
     html.inquilinos.innerHTML = " ";
 
     vecinos.forEach( persona => {
-        const { id, nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, costo, pago } = persona;
+        const { id, nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, costo, pago, img } = persona;
 
         const div = document.createElement("DIV");
         div.classList.add("acordeon");
         div.innerHTML = `<div class="card">
                             <h2 class="h2">Departamento ${departamento}</h2>
                             <div class="card__imagen">
-                                <img src="./img/63765.jpg" alt="perfil">
+                                <img src="${img}" alt="perfil">
                             </div>
                             <div class="card__pago">
                                 <p> ${pago}</p>
@@ -160,8 +169,7 @@ function eliminarTodos () {
 
 function elimination(id){
     vecinos = vecinos.filter( inquilino => inquilino.id !== id )   
-    // vecinos = nuevo
-    localStorage.setItem("data", JSON.stringify(vecinos));
+    localStorage.setItem( "data", JSON.stringify(vecinos) );
     mostrarInquilinos()
 }
 
@@ -236,14 +244,14 @@ html.menu.forEach((btn, indiceBtn) => {
 function hotelModal(evt) {
 
     vecinos.forEach( inquilino => {
-        const { nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, costo, pago } = inquilino;
+        const { nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, costo, pago, img } = inquilino;
         
         if ( evt.target.id == departamento ) {
             Swal.fire({
                 html: `<div class="sweet-modal">
                             <h2 class="sweet-piso">${departamento}
                             <div class="card__imagen">
-                                <img src="./img/63765.jpg" alt="perfil">
+                                <img src="${img}" alt="perfil">
                             </div>    
                             <h3 class="sweet-nombre">${nombre} ${apellido}</h3>                           
                             <p class="sweet-texto">Desde: ${fecha}</p> 
@@ -261,18 +269,3 @@ function hotelModal(evt) {
         }
     })
 }
-
-       
-    // function acordeon (evt) {
-    //     const acordeon = evt.target.nextElementSibling
-    //     acordeon.classList.toggle("activo")
-        
-    // }
- 
-    // html.h2.forEach( titulo =>{
-
-    //     titulo.addEventListener( "click", (e) => {
-    //         const acordeon = e.target.nextElementSibling
-    //         acordeon.classList.toggle("activo")
-    //     })
-    // })
