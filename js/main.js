@@ -91,17 +91,18 @@ async function crear (evt) {
     const apiUrl = `https://avatars.dicebear.com/api/adventurer-neutral/${seed}.svg`;
     const img = await obtenerImg(apiUrl)
     
-    vecinos.find( inquilino => {
-        if(inquilino.departamento == departamento) {
-            console.log("ya hay uno")
-            return
-        }
-    })
-
+    const inquilinoExiste = vecinos.find( inquilino => inquilino.departamento == departamento)
+    
+    if(inquilinoExiste){
+        console.log("holi")
+        return
+    }
+    console.log("else")
     vecinosAdd = new Vecino(id, nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, temporadaAlta, costo, pago, img);
     vecinos.push(vecinosAdd)
     
     localStorage.setItem("data", JSON.stringify(vecinos));
+    
     
 };
 
@@ -111,7 +112,7 @@ async function obtenerImg(apiUrl) {
         if(!res.ok) throw(res.status)
         return res.url
     }catch (err) {
-        console.log("Ocurrió un error:",err)
+        console.log("Ocurrió un error:", err)
     }
 }
 
@@ -153,12 +154,11 @@ function mostrarInquilinos() {
                                     </div>
                                 </div>    
                             </div>
-                            <button onclick="elimination(${id})" id="${id}">Eliminar</button>
+                            <button onclick="eliminarInquilino(${id})" id="${id}">Eliminar</button>
                         </div>`;    
         
         html.inquilinos.appendChild(div);
              
-        // document.getElementById(id).addEventListener("click", eliminarInquilino)   
     }) 
 };
 
@@ -167,18 +167,11 @@ function eliminarTodos () {
     location.reload()
 }
 
-function elimination(id){
+function eliminarInquilino(id){
     vecinos = vecinos.filter( inquilino => inquilino.id !== id )   
     localStorage.setItem( "data", JSON.stringify(vecinos) );
     mostrarInquilinos()
 }
-
-// function eliminarInquilino (evt) {
-//     console.log(evt.target) 
-//     vecinos.splice(evt.target)
-//     localStorage.setItem("data", JSON.stringify(vecinos));
-//     mostrarInquilinos()    
-// }
 
 function calcularPrecio () {
     const precioPorDia = html.inputTemporada.checked
@@ -202,8 +195,6 @@ function fechaDeVencimiento() {
 
     calcularPrecio();
 }
-
-
 
 function tomarPago () {
     const inputColor = html.inputPago.checked ? "#0a66c2" : "#e85252";
