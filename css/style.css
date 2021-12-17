@@ -28,10 +28,10 @@ body {
 }
 .navegacion__buttons {
     /* background-color: burlywood; */
-    max-width: 90rem;
+    max-width: 30rem;
     margin: 0 auto;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 }
 .navegacion button {
     padding: 5px;
@@ -198,8 +198,14 @@ select option[value=""][disabled] {
         
     }
 }
+@media (max-width: 468px)  {
+    .grid-2 {
+        grid-template-columns: none;
+    }
+}
+
 #formulario-display {
-    display: block;
+    display: none;
 }
 
 
@@ -243,9 +249,83 @@ select option[value=""][disabled] {
 
 /*********** HOTEL FIN **************/
 
+
+/*********** PANEL DE CONTROL **************/
+.costos {
+    background-color: #fff;
+    max-width: 35rem;
+    margin: 2rem auto;
+    padding: 1rem;
+    box-shadow: 0px 5px 10px 2px rgba(0,0,0,0.1);
+    border-radius: 5px;
+}
+.costos__titulo {
+    text-align: center;
+    text-transform: uppercase;
+    border-bottom: 2px solid #333;
+    margin-bottom: 2rem;
+}
+.costos__dias {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #e1e1e1;
+    margin-bottom: 1rem;
+}
+.costos__dias:last-of-type {
+    border-bottom: none;
+}
+.costos input {
+    max-width: 7rem;
+    text-align: center;
+    border-bottom: none;
+    background-color: #e1e1e1;
+    background-color: rgba(243, 235, 235, 0.637);
+    border-radius: 5px;
+    margin-bottom: 0;
+}
+.costos .btn__control {
+    display: block;
+}
+.costos p {
+    text-align: center;
+    color: #28B604;
+}
+.btn__control {
+    margin: 0 auto;
+    padding: 1rem 3rem;
+    cursor: pointer;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    margin-bottom: 1rem;
+}
+.btn__control:hover {
+    background-color: black;
+}
+.titulo__inquilinos {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 5rem auto 2rem;
+    background-color: #fff;
+    max-width: 20rem;
+    box-shadow: 0px 5px 10px 2px rgba(0,0,0,0.1);
+    border: 1px solid #333;
+    /* border-radius: 5px; */
+    padding: .5rem;
+}
+.inquilinos__btn {
+    display: flex;
+    max-width: 60rem;
+    margin: 0 auto;
+
+}
+
+
 /*********** CARD **************/
 #card-display {
-    display: none;
+    display: block;
 }
 .contenedor-card {
     display: grid;

@@ -1,5 +1,5 @@
-const costoPorDia = 20;
-const costoPorDiaAlta = 35;
+const costoPorDia = JSON.parse(localStorage.getItem("normal")) || 20;
+const costoPorDiaAlta =JSON.parse(localStorage.getItem("alta")) || 30;
 const pisos = {
     numeros: [1, 2, 3, 4, 5],
     letras : ["A", "B", "C", "D", "E"]
@@ -34,6 +34,11 @@ const html = {
     btnMostrar : document.querySelector("#mostrar"),
     btnEliminarTodos : document.querySelector("#eliminar-todos"),
     inquilinos : document.querySelector(".contenedor-card"),
+    btnGuardarCosto : document.querySelector("#guardar-costos"),
+    inputValorNormal : document.querySelector("#valor__normal"),
+    inputValorTempAlta : document.querySelector("#valor__temporadaAlta"),
+    parrafoExito : document.querySelector(".guardado"),
+    costos : document.querySelector(".costos"),
 };
 
 class Vecino {
@@ -59,19 +64,33 @@ for(const letra of pisos.letras) {
     html.inputPisoL.innerHTML += `<option>${letra}</option>` 
 }
 
-//Eventos
+/******* EVENTOS *******/
+
 html.formulario.addEventListener("submit", crear);
+html.inputDias.addEventListener("input", fechaDeVencimiento);
+html.inputTemporada.addEventListener("change", calcularPrecio);
+html.inputPago.addEventListener("change", tomarPago);
+html.btnVentanas.addEventListener("click", hotelModal);
+html.btnGuardarCosto.addEventListener("click", guardarCostos);
+document.addEventListener("DOMContentLoaded", actualizarValues)
 html.btnMostrar.addEventListener("click", mostrarInquilinos);
 html.btnEliminarTodos.addEventListener("click", eliminarTodos);
-html.btnVentanas.addEventListener("click", hotelModal)
-html.inputDias.addEventListener("input", fechaDeVencimiento);
-html.inputTemporada.addEventListener("change", calcularPrecio)
-// html.btnForm.addEventListener("click", cargarFormulario)
-// html.btnHotel.addEventListener("click", cargarHotel)
-// html.btnControl.addEventListener("click", cargarControl)
-html.inputPago.addEventListener("change", tomarPago)
 
-//Funciones
+
+/******* FUNCIONES *******/
+
+//Menú
+html.menu.forEach((btn, indiceBtn) => {
+    
+    btn.addEventListener("click", () => {
+        html.activo.forEach((bloque, indiceBloque) => {
+            bloque.style.display = "none";
+        })
+        html.activo[indiceBtn].style.display = "block";
+    }) 
+})
+
+//Formulario
 async function crear (evt) {
     evt.preventDefault();    
     const id = vecinos.length + 1;
@@ -89,9 +108,9 @@ async function crear (evt) {
     const pago = pagoTexto;
     const seed = nombre + apellido;
     const apiUrl = `https://avatars.dicebear.com/api/adventurer-neutral/${seed}.svg`;
-    const img = await obtenerImg(apiUrl)
+    const img = await obtenerImg(apiUrl);
     
-    const inquilinoExiste = vecinos.find( inquilino => inquilino.departamento == departamento)
+    const inquilinoExiste = vecinos.find( inquilino => inquilino.departamento == departamento);
     
     if(inquilinoExiste){
         console.log("holi")
@@ -114,6 +133,109 @@ async function obtenerImg(apiUrl) {
     }catch (err) {
         console.log("Ocurrió un error:", err)
     }
+}
+
+function calcularPrecio () {
+    const precioPorDia = html.inputTemporada.checked
+        ? `$ ${costoPorDiaAlta * html.inputDias.value}`
+        : `$ ${costoPorDia * html.inputDias.value}`;
+    html.inputCosto.value =  precioPorDia;
+}
+
+function fechaDeVencimiento() {
+    const obtenerDias = Number(html.inputDias.value);
+    const obtenerFecha = new Date(html.inputFecha.value);
+    obtenerFecha.setDate(obtenerFecha.getDate() + obtenerDias + 1);
+
+    const separarFecha = {
+       año: obtenerFecha.getFullYear(),
+       mes: (obtenerFecha.getMonth() + 1).toString().padStart(2, 0),
+       dia: obtenerFecha.getDate().toString().padStart(2, 0)
+    }
+    
+    html.inputFechaFin.value = `${separarFecha.año}-${separarFecha.mes}-${separarFecha.dia}`;
+
+    calcularPrecio();
+}
+
+function tomarPago () {
+    const inputColor = html.inputPago.checked ? "#0a66c2" : "#e85252";
+    html.inputCosto.style["background-color"] = inputColor;
+}
+
+
+// function cargarFormulario () {
+//     // document.body.style["background-color"] = "#BEAEE2";
+//     html.hotelDisplay.style.display = "none";
+//     html.cardDisplay.style.display = "none";
+//     html.formularioDisplay.style.display = "block";
+// }
+
+// function cargarHotel () {
+//     // document.querySelector("body").style["background-image"] = "url(../img/casas.png)"
+//     html.formularioDisplay.style.display = "none";
+//     html.cardDisplay.style.display = "none";
+//     html.hotelDisplay.style.display = "block";
+// }
+
+// function cargarControl () {
+//     html.body.style["background-image"] = "none";
+//     html.formularioDisplay.style.display = "none";
+//     html.hotelDisplay.style.display = "none";
+//     html.cardDisplay.style.display = "block";
+// }
+
+//Hotel
+function hotelModal(evt) {
+
+    vecinos.forEach( inquilino => {
+        const { nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, costo, pago, img } = inquilino;
+        
+        if ( evt.target.id == departamento ) {
+            Swal.fire({
+                html: `<div class="sweet-modal">
+                            <h2 class="sweet-piso">${departamento}
+                            <div class="card__imagen">
+                                <img src="${img}" alt="perfil">
+                            </div>    
+                            <h3 class="sweet-nombre">${nombre} ${apellido}</h3>                           
+                            <p class="sweet-texto">Desde: ${fecha}</p> 
+                            <p class="sweet-texto">Hasta: ${fechaDeVencimiento}</p> 
+                            <p class="sweet-texto">Teléfono: ${telefono}</p> 
+                            <p class="sweet-texto">Costo ${costo}</p>
+                        </div>`,
+                confirmButtonText: "Aceptar",
+                footer: `<b>${pago}</b>`,
+                customClass: {
+                    image: '...',
+                    confirmButton: '...'     
+                }
+            })   
+        }
+    })
+}
+
+//Panel de control
+function guardarCostos(e) {
+    localStorage.setItem("normal", JSON.stringify(html.inputValorNormal.value));
+    localStorage.setItem("alta", JSON.stringify(html.inputValorTempAlta.value));
+    
+    const parrafo = document.createElement("P");
+    parrafo.classList.add("parrafo");
+    parrafo.textContent = "¡Guardado con éxito!"
+
+    html.costos.appendChild(parrafo);
+
+    setTimeout(() => {
+        parrafo.remove()
+        location.reload()
+    }, 1000);
+
+}
+
+function actualizarValues() {
+    html.inputValorNormal.setAttribute("value", costoPorDia);
+    html.inputValorTempAlta.setAttribute("value", costoPorDiaAlta);
 }
 
 function mostrarInquilinos() {
@@ -163,7 +285,7 @@ function mostrarInquilinos() {
 };
 
 function eliminarTodos () {
-    localStorage.clear()
+    localStorage.removeItem("data")
     location.reload()
 }
 
@@ -171,92 +293,4 @@ function eliminarInquilino(id){
     vecinos = vecinos.filter( inquilino => inquilino.id !== id )   
     localStorage.setItem( "data", JSON.stringify(vecinos) );
     mostrarInquilinos()
-}
-
-function calcularPrecio () {
-    const precioPorDia = html.inputTemporada.checked
-        ? `$ ${costoPorDiaAlta * html.inputDias.value}`
-        : `$ ${costoPorDia * html.inputDias.value}`;
-    html.inputCosto.value =  precioPorDia;
-}
-
-function fechaDeVencimiento() {
-    const obtenerDias = Number(html.inputDias.value);
-    const obtenerFecha = new Date(html.inputFecha.value);
-    obtenerFecha.setDate(obtenerFecha.getDate() + obtenerDias + 1);
-
-    const separarFecha = {
-       año: obtenerFecha.getFullYear(),
-       mes: (obtenerFecha.getMonth() + 1).toString().padStart(2, 0),
-       dia: obtenerFecha.getDate().toString().padStart(2, 0)
-    }
-    
-    html.inputFechaFin.value = `${separarFecha.año}-${separarFecha.mes}-${separarFecha.dia}`;
-
-    calcularPrecio();
-}
-
-function tomarPago () {
-    const inputColor = html.inputPago.checked ? "#0a66c2" : "#e85252";
-    html.inputCosto.style["background-color"] = inputColor;
-}
-
-html.menu.forEach((btn, indiceBtn) => {
-    
-    btn.addEventListener("click", () => {
-        html.activo.forEach((bloque, indiceBloque) => {
-            bloque.style.display = "none";
-        })
-        html.activo[indiceBtn].style.display = "block";
-    }) 
-})
-
-// function cargarFormulario () {
-//     // document.body.style["background-color"] = "#BEAEE2";
-//     html.hotelDisplay.style.display = "none";
-//     html.cardDisplay.style.display = "none";
-//     html.formularioDisplay.style.display = "block";
-// }
-
-// function cargarHotel () {
-//     // document.querySelector("body").style["background-image"] = "url(../img/casas.png)"
-//     html.formularioDisplay.style.display = "none";
-//     html.cardDisplay.style.display = "none";
-//     html.hotelDisplay.style.display = "block";
-// }
-
-// function cargarControl () {
-//     html.body.style["background-image"] = "none";
-//     html.formularioDisplay.style.display = "none";
-//     html.hotelDisplay.style.display = "none";
-//     html.cardDisplay.style.display = "block";
-// }
-
-function hotelModal(evt) {
-
-    vecinos.forEach( inquilino => {
-        const { nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, costo, pago, img } = inquilino;
-        
-        if ( evt.target.id == departamento ) {
-            Swal.fire({
-                html: `<div class="sweet-modal">
-                            <h2 class="sweet-piso">${departamento}
-                            <div class="card__imagen">
-                                <img src="${img}" alt="perfil">
-                            </div>    
-                            <h3 class="sweet-nombre">${nombre} ${apellido}</h3>                           
-                            <p class="sweet-texto">Desde: ${fecha}</p> 
-                            <p class="sweet-texto">Hasta: ${fechaDeVencimiento}</p> 
-                            <p class="sweet-texto">Teléfono: ${telefono}</p> 
-                            <p class="sweet-texto">Costo ${costo}</p>
-                        </div>`,
-                confirmButtonText: "Aceptar",
-                footer: `<b>${pago}</b>`,
-                customClass: {
-                    image: '...',
-                    confirmButton: '...'     
-                }
-            })   
-        }
-    })
 }

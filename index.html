@@ -30,7 +30,7 @@
                 <h3 class="card__titulo">Formulario de Registro</h3>
 
                 <div class="image-holder">
-                    <img class="img-lateral" src="img/example-8.png" alt="image">
+                    <img class="img-lateral" src="img/formulario.png" alt="image">
                 </div>
                 <form id="formulario" action="">
 
@@ -63,7 +63,7 @@
                     <div class="grid-2">
                         <input id="fecha-fin" type="date" placeholder="Fecha" class="form-control" disabled required>
                         <div class="form-control checkbox">
-                            <label for="temporada-checkbox" class=>Temporada Alta</label>
+                            <label for="temporada-checkbox">Temporada Alta</label>
                             <input id="temporada-checkbox" type="checkbox">
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                     <div class="grid-2">
                         <input id="input-costo" type="text" placeholder="$$$" class="form-control" disabled>
                         <div class="form-control checkbox">
-                            <label for="pago-checkbox" class=>Pago Recibido</label>
+                            <label for="pago-checkbox">Pago Recibido</label>
                             <input id="pago-checkbox" type="checkbox">
                         </div>
                     </div>
@@ -129,9 +129,26 @@
 
 
     <div class="display" id="card-display">
+        <div class="costos">
+            <h3 class="costos__titulo">Costo por día</h3>
+            <div class="costos__dias">
+                <label for="">Día normal:</label>
+                <input id="valor__normal" class="form-control" type="number" min="0">
+            </div>
+            <div class="costos__dias">
+                <label for="">Temporada alta:</label>
+                <input id="valor__temporadaAlta" class="form-control" type="number" min="0">
+            </div>
+            <button id="guardar-costos" class="btn__control">Guardar</button>
+            <!-- <p class="guardado"></p> -->
+        </div>
 
-        <button id="mostrar">Mostrar Inquilinos</button>
-        <button id="eliminar-todos">Eliminar a todos</button>
+        <h2 class="titulo__inquilinos">Inquilinos</h2>
+        <div class="inquilinos__btn">
+            <button id="mostrar" class="btn__control">Todos</button>
+            <button id="deudores" class="btn__control">Deudores</button>
+            <button id="eliminar-todos" class="btn__control">Eliminarlos</button>
+        </div>
         <div class="contenedor-card">
 
             <!-- <div class="acordeon">
@@ -203,7 +220,6 @@
 
 
         </div>
-    </div>
     </div>
 
     <script src="./js/sweetalert2.all.min.js"></script>
