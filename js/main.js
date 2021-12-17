@@ -1,10 +1,10 @@
 const costoPorDia = JSON.parse(localStorage.getItem("normal")) || 20;
 const costoPorDiaAlta =JSON.parse(localStorage.getItem("alta")) || 30;
+let vecinos = JSON.parse(localStorage.getItem("data")) || [];
 const pisos = {
     numeros: [1, 2, 3, 4, 5],
     letras : ["A", "B", "C", "D", "E"]
 };
-let vecinos = JSON.parse(localStorage.getItem("data")) || [];
 
 const html = {
     //Menú de navegación
