@@ -31,14 +31,15 @@ const html = {
     btnVentana :document.querySelectorAll(".ventana"),
     
     //Panel de control
-    btnMostrar : document.querySelector("#mostrar"),
-    btnEliminarTodos : document.querySelector("#eliminar-todos"),
-    inquilinos : document.querySelector(".contenedor-card"),
     btnGuardarCosto : document.querySelector("#guardar-costos"),
     inputValorNormal : document.querySelector("#valor__normal"),
     inputValorTempAlta : document.querySelector("#valor__temporadaAlta"),
     parrafoExito : document.querySelector(".guardado"),
     costos : document.querySelector(".costos"),
+    btnMostrar : document.querySelector("#mostrar"),
+    btnDeudores : document.querySelector("#deudores"),
+    btnEliminarTodos : document.querySelector("#eliminar-todos"),
+    inquilinos : document.querySelector(".contenedor-card"),
 };
 
 class Vecino {
@@ -74,6 +75,7 @@ html.btnVentanas.addEventListener("click", hotelModal);
 html.btnGuardarCosto.addEventListener("click", guardarCostos);
 document.addEventListener("DOMContentLoaded", actualizarValues)
 html.btnMostrar.addEventListener("click", mostrarInquilinos);
+html.btnDeudores.addEventListener("click", mostrarDeudores);
 html.btnEliminarTodos.addEventListener("click", eliminarTodos);
 
 
@@ -219,15 +221,10 @@ function hotelModal(evt) {
 function guardarCostos(e) {
     localStorage.setItem("normal", JSON.stringify(html.inputValorNormal.value));
     localStorage.setItem("alta", JSON.stringify(html.inputValorTempAlta.value));
+
+    html.parrafoExito.innerHTML = "¡Guardado con éxito!"
     
-    const parrafo = document.createElement("P");
-    parrafo.classList.add("parrafo");
-    parrafo.textContent = "¡Guardado con éxito!"
-
-    html.costos.appendChild(parrafo);
-
     setTimeout(() => {
-        parrafo.remove()
         location.reload()
     }, 1000);
 
@@ -239,50 +236,61 @@ function actualizarValues() {
 }
 
 function mostrarInquilinos() {
-    
     html.inquilinos.innerHTML = " ";
 
     vecinos.forEach( persona => {
-        const { id, nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, costo, pago, img } = persona;
-
-        const div = document.createElement("DIV");
-        div.classList.add("acordeon");
-        div.innerHTML = `<div class="card">
-                            <h2 class="h2">Departamento ${departamento}</h2>
-                            <div class="card__imagen">
-                                <img src="${img}" alt="perfil">
-                            </div>
-                            <div class="card__pago">
-                                <p> ${pago}</p>
-                            </div>
-                            <div class="card__detalles">
-                                <h3>${nombre} ${apellido}</h3>
-                                <div class="card__detalles__grid">
-                                    <div class="card__items">
-                                        <p>Ingreso</p> 
-                                        <p>${fecha}</p>
-                                    </div>
-                                    <div class="card__items">
-                                        <p>Egreso</p> 
-                                        <p>${fechaDeVencimiento}</p>
-                                    </div>
-                                    <div class="card__items">
-                                        <p>Teléfono</p> 
-                                        <p>${telefono}</p>
-                                    </div>
-                                    <div class="card__items">
-                                        <p>Costo</p> 
-                                        <p>${costo}</p>
-                                    </div>
-                                </div>    
-                            </div>
-                            <button onclick="eliminarInquilino(${id})" id="${id}">Eliminar</button>
-                        </div>`;    
-        
-        html.inquilinos.appendChild(div);
-             
-    }) 
+        estiloCards( { id, nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, costo, pago, img } = persona );   
+    }); 
 };
+
+function mostrarDeudores() {
+    html.inquilinos.innerHTML = " ";
+
+    vecinos.filter( persona => {
+        
+        if (persona.pago == "No pago"){
+            estiloCards( { id, nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, costo, pago, img } = persona );
+        };    
+    });    
+};
+
+function estiloCards() {
+    const div = document.createElement("DIV");
+    div.classList.add("acordeon");
+    div.innerHTML = `<div class="card">
+                        <h2 class="h2">Departamento ${departamento}</h2>
+                        <div class="card__imagen">
+                            <img src="${img}" alt="perfil">
+                        </div>
+                        <div class="card__pago">
+                            <p> ${pago}</p>
+                        </div>
+                        <div class="card__detalles">
+                            <h3>${nombre} ${apellido}</h3>
+                            <div class="card__detalles__grid">
+                                <div class="card__items">
+                                    <p>Ingreso</p> 
+                                    <p>${fecha}</p>
+                                </div>
+                                <div class="card__items">
+                                    <p>Egreso</p> 
+                                    <p>${fechaDeVencimiento}</p>
+                                </div>
+                                <div class="card__items">
+                                    <p>Teléfono</p> 
+                                    <p>${telefono}</p>
+                                </div>
+                                <div class="card__items">
+                                    <p>Costo</p> 
+                                    <p>${costo}</p>
+                                </div>
+                            </div>    
+                        </div>
+                        <button onclick="eliminarInquilino(${id})" id="${id}">Eliminar</button>
+                    </div>`;    
+    
+    html.inquilinos.appendChild(div);
+}
 
 function eliminarTodos () {
     localStorage.removeItem("data")
