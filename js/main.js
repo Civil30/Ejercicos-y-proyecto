@@ -134,6 +134,7 @@ async function crear (evt) {
         timer: 1500
     })
     html.formulario.reset();
+    tomarPago()
 };
 
 async function obtenerImg(apiUrl) {
