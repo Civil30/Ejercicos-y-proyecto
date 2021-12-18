@@ -8,22 +8,17 @@ body {
     font-family: 'Ubuntu', sans-serif;
     margin: 0;
     background-repeat: no-repeat;
-    background-image: url(../img/casasSah.png);
-    background-size: contain;
+    background-image: url(../img/colores.jpg);
     background-size: cover;
-    width: 100%;
-    height: auto;
     background-position: center center;
-    /* backdrop-filter: blur(10px); */
-	background-color: #BEAEE2;
     font-size: 1.6rem;
-
 }
 
 /*************NAVEGACION*************/
 .navegacion {
     max-width: 100vw;
-    background-color: rgba(0,0,0,0.5);
+    /* background-color: rgba(0,0,0,0.9); */
+    background-color: #333;
     padding: 1rem;
 }
 .navegacion__buttons {
@@ -45,6 +40,10 @@ body {
 
 
 /*********** FORMULARIO **************/
+#formulario-display {
+    display: block;
+}
+
 input, select, .form__btn {
     font-family: arial;
     color: #333;
@@ -65,9 +64,7 @@ p, h1, h2, h3, h4, h5, h6 {
 }
    
 .wrapper {
-    height: 90vh;
-    /* background-size: cover; */
-    /* background-repeat: no-repeat; */
+    padding-top: 7rem;
     display: flex;
     align-items: center; 
 } 
@@ -203,21 +200,21 @@ select option[value=""][disabled] {
         grid-template-columns: none;
     }
 }
-
-#formulario-display {
-    display: none;
-}
-
-
 /*********** FORMULARIO FIN **************/
 
-.contenido {
-    max-width: 1200px;
-    margin: 0 auto;
-}
+
 /*********** HOTEL **************/
-#hotel-display {
+.display.hotel.fondo {
     display: none;
+    background-image: url(../img/casas.png);
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: #B8E4F0;
+    
+}
+
+#hotel-display {
     margin: 0 auto;
     min-height: 90rem;
     background-image: url(../img/hotel.png);
@@ -230,13 +227,10 @@ select option[value=""][disabled] {
     padding-top: 25rem;
     display: grid;
     width: 31.5rem;
-    /* height: 95vh; */
     margin: 0 auto;
     grid-template-columns: repeat(5, 1fr);
     row-gap: 49px;
     column-gap: 28px;
-    /* height: 20rem; */
-    /* background-color: rgba(0,0,0,0.3); */
 }
 
 .ventana {
@@ -251,6 +245,9 @@ select option[value=""][disabled] {
 
 
 /*********** PANEL DE CONTROL **************/
+#card-display {
+    display: none;
+}
 .costos {
     background-color: #fff;
     max-width: 35rem;
@@ -258,6 +255,7 @@ select option[value=""][disabled] {
     padding: 1rem;
     box-shadow: 0px 5px 10px 2px rgba(0,0,0,0.1);
     border-radius: 5px;
+    border: 1px solid #333;
 }
 .costos__titulo {
     text-align: center;
@@ -318,7 +316,7 @@ select option[value=""][disabled] {
 .inquilinos__btns {
     display: flex;
     max-width: 60rem;
-    margin: 0 auto;
+    margin: 4rem auto 4rem;
 }
 .inquilinos__btns button {
     width: 8rem;
@@ -326,9 +324,6 @@ select option[value=""][disabled] {
 
 
 /*********** CARD **************/
-#card-display {
-    display: block;
-}
 .contenedor-card {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
@@ -336,6 +331,7 @@ select option[value=""][disabled] {
     gap: 2rem;
     max-width: 95%;
     margin: 0 auto;
+    padding-bottom: 2rem;
 }
 
 .acordeon .h2 {

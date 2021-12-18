@@ -79,7 +79,7 @@ html.btnEliminarTodos.addEventListener("click", eliminarTodos);
 
 /******* FUNCIONES *******/
 
-//Menú
+// Menú //
 html.menu.forEach((btn, indiceBtn) => {
     
     btn.addEventListener("click", () => {
@@ -90,7 +90,7 @@ html.menu.forEach((btn, indiceBtn) => {
     }) 
 })
 
-//Formulario
+// Formulario //
 async function crear (evt) {
     evt.preventDefault();    
     const id = vecinos.length + 1;
@@ -100,8 +100,8 @@ async function crear (evt) {
     const pisoLetra = html.inputPisoL.value;
     const departamento = `${pisoNumero} - ${pisoLetra}`;
     const telefono = html.inputTelefono.value;
-    const fecha = html.inputFecha.value;
-    const fechaDeVencimiento = html.inputFechaFin.value;
+    const fecha = formatearFechas(html.inputFecha.value);
+    const fechaDeVencimiento = formatearFechas(html.inputFechaFin.value);
     const temporadaAlta = html.inputTemporada.checked;
     const costo = html.inputCosto.value;
     const pagoTexto = html.inputPago.checked ? "Pago" : "No pago";
@@ -118,16 +118,22 @@ async function crear (evt) {
             text: "Primero debe de eliminar a su inquilino actual",
             icon: "warning",
             confirmButtonText: "Entendido"
-        })
-        return
+        });
+        return;
     }
-    console.log("else")
+
     vecinosAdd = new Vecino(id, nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, temporadaAlta, costo, pago, img);
-    vecinos.push(vecinosAdd)
+    vecinos.push(vecinosAdd);
     
     localStorage.setItem("data", JSON.stringify(vecinos));
     
-    
+    Swal.fire({
+        icon: 'success',
+        title: 'Inquilino guardado',
+        showConfirmButton: false,
+        timer: 1500
+    })
+    html.formulario.reset();
 };
 
 async function obtenerImg(apiUrl) {
@@ -138,6 +144,11 @@ async function obtenerImg(apiUrl) {
     }catch (err) {
         console.log("Ocurrió un error:", err)
     }
+}
+
+function formatearFechas(fecha) {
+    const formato = fecha.split("-").reverse().join("-");
+    return formato;
 }
 
 function calcularPrecio () {
@@ -164,11 +175,11 @@ function fechaDeVencimiento() {
 }
 
 function tomarPago () {
-    const inputColor = html.inputPago.checked ? "#0a66c2" : "#e85252";
+    const inputColor = html.inputPago.checked ? "#18a795" : "#e85252";
     html.inputCosto.style["background-color"] = inputColor;
 }
 
-//Hotel
+// Hotel //
 function hotelModal(evt) {
 
     vecinos.forEach( inquilino => {
@@ -189,16 +200,12 @@ function hotelModal(evt) {
                         </div>`,
                 confirmButtonText: "Aceptar",
                 footer: `<b>${pago}</b>`,
-                customClass: {
-                    image: '...',
-                    confirmButton: '...'     
-                }
             })   
         }
     })
 }
 
-//Panel de control
+// Panel de control //
 function guardarCostos(e) {
     localStorage.setItem("normal", JSON.stringify(html.inputValorNormal.value));
     localStorage.setItem("alta", JSON.stringify(html.inputValorTempAlta.value));
@@ -208,7 +215,6 @@ function guardarCostos(e) {
     setTimeout(() => {
         location.reload()
     }, 1000);
-
 }
 
 function actualizarValues() {
@@ -218,6 +224,15 @@ function actualizarValues() {
 
 function mostrarInquilinos() {
     html.inquilinos.innerHTML = " ";
+    vecinos.sort( (a,b) => {
+        if(a.departamento < b.departamento) {
+            return -1;
+        }
+        if(a.departamento > b.departamento) {
+            return 1;
+        }
+        return 0;
+    });   
 
     vecinos.forEach( persona => {
         const { id, nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, costo, pago, img } = persona;   
@@ -269,27 +284,3 @@ function eliminarInquilino(id){
     localStorage.setItem( "data", JSON.stringify(vecinos) );
     mostrarInquilinos()
 }
-
-
-
-
-// function cargarFormulario () {
-//     // document.body.style["background-color"] = "#BEAEE2";
-//     html.hotelDisplay.style.display = "none";
-//     html.cardDisplay.style.display = "none";
-//     html.formularioDisplay.style.display = "block";
-// }
-
-// function cargarHotel () {
-//     // document.querySelector("body").style["background-image"] = "url(../img/casas.png)"
-//     html.formularioDisplay.style.display = "none";
-//     html.cardDisplay.style.display = "none";
-//     html.hotelDisplay.style.display = "block";
-// }
-
-// function cargarControl () {
-//     html.body.style["background-image"] = "none";
-//     html.formularioDisplay.style.display = "none";
-//     html.hotelDisplay.style.display = "none";
-//     html.cardDisplay.style.display = "block";
-// }
