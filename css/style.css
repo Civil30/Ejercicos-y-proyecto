@@ -8,7 +8,7 @@ body {
     font-family: 'Ubuntu', sans-serif;
     margin: 0;
     background-repeat: no-repeat;
-    background-image: url(../img/vector.png);
+    background-image: url(../img/casasSah.png);
     background-size: contain;
     background-size: cover;
     width: 100%;
@@ -315,11 +315,13 @@ select option[value=""][disabled] {
     /* border-radius: 5px; */
     padding: .5rem;
 }
-.inquilinos__btn {
+.inquilinos__btns {
     display: flex;
     max-width: 60rem;
     margin: 0 auto;
-
+}
+.inquilinos__btns button {
+    width: 8rem;
 }
 
 
@@ -339,8 +341,6 @@ select option[value=""][disabled] {
 .acordeon .h2 {
     text-align: center;
     padding: 1rem 0 0.5rem 0;
-    /* border-bottom: 1px groove #eee; */
-    /* cursor: pointer; */
 }
 
 .card {
@@ -350,14 +350,8 @@ select option[value=""][disabled] {
     border: 1px solid #eee;
     text-align: center;
     border-radius: 10px;
-    /* height: 0; */
-    /* overflow: hidden; */
-    /* transition: height 0.5s ease; */
     box-shadow: 0px 5px 10px 2px rgba(0,0,0,0.1);    
 }
-/* .card.activo {
-    height: auto;
-} */
 .card__imagen img {
     padding: 2rem 0px 1rem;
     max-width: 15rem;

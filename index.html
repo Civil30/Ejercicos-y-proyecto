@@ -36,17 +36,17 @@
 
                     <!-- Nombre y Apellido -->
                     <div class="grid-2">
-                        <input id="nombre" type="text" placeholder="Nombre" class="form-control">
-                        <input id="apellido" type="text" placeholder="Apellido" class="form-control">
+                        <input id="nombre" type="text" placeholder="Nombre" class="form-control" required>
+                        <input id="apellido" type="text" placeholder="Apellido" class="form-control" required>
                     </div>
 
                     <!-- Select y Telefono  -->
                     <div class="grid-2">
                         <div class="grid-2">
-                            <select id="pisoN" class="form-control">
+                            <select id="pisoN" class="form-control" required>
                                 <option value="" selected disabled>Piso</option>
                             </select>
-                            <select id="pisoL" class="form-control">
+                            <select id="pisoL" class="form-control" required>
                                 <option value="" selected disabled>Dpto</option>
                             </select>
                         </div>
@@ -144,9 +144,8 @@
         </div>
 
         <h2 class="titulo__inquilinos">Inquilinos</h2>
-        <div class="inquilinos__btn">
-            <button id="mostrar" class="btn__control aver">Todos</button>
-            <button id="deudores" class="btn__control aver">Deudores</button>
+        <div class="inquilinos__btns">
+            <button id="mostrar" class="btn__control aver">Ver todos</button>
             <button id="eliminar-todos" class="btn__control">Eliminarlos</button>
         </div>
         <div class="contenedor-card">

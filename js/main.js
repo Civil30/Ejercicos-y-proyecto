@@ -37,7 +37,6 @@ const html = {
     parrafoExito : document.querySelector(".guardado"),
     costos : document.querySelector(".costos"),
     btnMostrar : document.querySelector("#mostrar"),
-    btnDeudores : document.querySelector("#deudores"),
     btnEliminarTodos : document.querySelector("#eliminar-todos"),
     inquilinos : document.querySelector(".contenedor-card"),
 };
@@ -75,7 +74,6 @@ html.btnVentanas.addEventListener("click", hotelModal);
 html.btnGuardarCosto.addEventListener("click", guardarCostos);
 document.addEventListener("DOMContentLoaded", actualizarValues)
 html.btnMostrar.addEventListener("click", mostrarInquilinos);
-html.btnDeudores.addEventListener("click", mostrarDeudores);
 html.btnEliminarTodos.addEventListener("click", eliminarTodos);
 
 
@@ -114,8 +112,13 @@ async function crear (evt) {
     
     const inquilinoExiste = vecinos.find( inquilino => inquilino.departamento == departamento);
     
-    if(inquilinoExiste){
-        console.log("holi")
+    if(inquilinoExiste) {
+        Swal.fire({
+            title: "¡Departamento ocupado!",
+            text: "Primero debe de eliminar a su inquilino actual",
+            icon: "warning",
+            confirmButtonText: "Entendido"
+        })
         return
     }
     console.log("else")
@@ -164,28 +167,6 @@ function tomarPago () {
     const inputColor = html.inputPago.checked ? "#0a66c2" : "#e85252";
     html.inputCosto.style["background-color"] = inputColor;
 }
-
-
-// function cargarFormulario () {
-//     // document.body.style["background-color"] = "#BEAEE2";
-//     html.hotelDisplay.style.display = "none";
-//     html.cardDisplay.style.display = "none";
-//     html.formularioDisplay.style.display = "block";
-// }
-
-// function cargarHotel () {
-//     // document.querySelector("body").style["background-image"] = "url(../img/casas.png)"
-//     html.formularioDisplay.style.display = "none";
-//     html.cardDisplay.style.display = "none";
-//     html.hotelDisplay.style.display = "block";
-// }
-
-// function cargarControl () {
-//     html.body.style["background-image"] = "none";
-//     html.formularioDisplay.style.display = "none";
-//     html.hotelDisplay.style.display = "none";
-//     html.cardDisplay.style.display = "block";
-// }
 
 //Hotel
 function hotelModal(evt) {
@@ -239,58 +220,44 @@ function mostrarInquilinos() {
     html.inquilinos.innerHTML = " ";
 
     vecinos.forEach( persona => {
-        estiloCards( { id, nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, costo, pago, img } = persona );   
+        const { id, nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, costo, pago, img } = persona;   
+        const div = document.createElement("DIV");
+        div.classList.add("acordeon");
+        div.innerHTML = `<div class="card">
+                            <h2 class="h2">Departamento ${departamento}</h2>
+                            <div class="card__imagen">
+                                <img src="${img}" alt="perfil">
+                            </div>
+                            <div class="card__pago">
+                                <p> ${pago}</p>
+                            </div>
+                            <div class="card__detalles">
+                                <h3>${nombre} ${apellido}</h3>
+                                <div class="card__detalles__grid">
+                                    <div class="card__items">
+                                        <p>Ingreso</p> 
+                                        <p>${fecha}</p>
+                                    </div>
+                                    <div class="card__items">
+                                        <p>Egreso</p> 
+                                        <p>${fechaDeVencimiento}</p>
+                                    </div>
+                                    <div class="card__items">
+                                        <p>Teléfono</p> 
+                                        <p>${telefono}</p>
+                                    </div>
+                                    <div class="card__items">
+                                        <p>Costo</p> 
+                                        <p>${costo}</p>
+                                    </div>
+                                </div>    
+                            </div>
+                            <button onclick="eliminarInquilino(${id})" id="${id}">Eliminar</button>
+                        </div>`;    
+        
+        html.inquilinos.appendChild(div);
     }); 
 };
-
-function mostrarDeudores() {
-    html.inquilinos.innerHTML = " ";
-
-    vecinos.filter( persona => {
-        
-        if (persona.pago == "No pago"){
-            estiloCards( { id, nombre, apellido, departamento, telefono, fecha, fechaDeVencimiento, costo, pago, img } = persona );
-        };    
-    });    
-};
-
-function estiloCards() {
-    const div = document.createElement("DIV");
-    div.classList.add("acordeon");
-    div.innerHTML = `<div class="card">
-                        <h2 class="h2">Departamento ${departamento}</h2>
-                        <div class="card__imagen">
-                            <img src="${img}" alt="perfil">
-                        </div>
-                        <div class="card__pago">
-                            <p> ${pago}</p>
-                        </div>
-                        <div class="card__detalles">
-                            <h3>${nombre} ${apellido}</h3>
-                            <div class="card__detalles__grid">
-                                <div class="card__items">
-                                    <p>Ingreso</p> 
-                                    <p>${fecha}</p>
-                                </div>
-                                <div class="card__items">
-                                    <p>Egreso</p> 
-                                    <p>${fechaDeVencimiento}</p>
-                                </div>
-                                <div class="card__items">
-                                    <p>Teléfono</p> 
-                                    <p>${telefono}</p>
-                                </div>
-                                <div class="card__items">
-                                    <p>Costo</p> 
-                                    <p>${costo}</p>
-                                </div>
-                            </div>    
-                        </div>
-                        <button onclick="eliminarInquilino(${id})" id="${id}">Eliminar</button>
-                    </div>`;    
-    
-    html.inquilinos.appendChild(div);
-}
 
 function eliminarTodos () {
     localStorage.removeItem("data")
@@ -302,3 +269,27 @@ function eliminarInquilino(id){
     localStorage.setItem( "data", JSON.stringify(vecinos) );
     mostrarInquilinos()
 }
+
+
+
+
+// function cargarFormulario () {
+//     // document.body.style["background-color"] = "#BEAEE2";
+//     html.hotelDisplay.style.display = "none";
+//     html.cardDisplay.style.display = "none";
+//     html.formularioDisplay.style.display = "block";
+// }
+
+// function cargarHotel () {
+//     // document.querySelector("body").style["background-image"] = "url(../img/casas.png)"
+//     html.formularioDisplay.style.display = "none";
+//     html.cardDisplay.style.display = "none";
+//     html.hotelDisplay.style.display = "block";
+// }
+
+// function cargarControl () {
+//     html.body.style["background-image"] = "none";
+//     html.formularioDisplay.style.display = "none";
+//     html.hotelDisplay.style.display = "none";
+//     html.cardDisplay.style.display = "block";
+// }
