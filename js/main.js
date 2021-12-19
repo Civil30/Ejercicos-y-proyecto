@@ -276,8 +276,21 @@ function mostrarInquilinos() {
 };
 
 function eliminarTodos () {
-    localStorage.removeItem("data")
-    location.reload()
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "Estás por eliminar a todos los inquilinos",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Eliminar!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            localStorage.removeItem("data")
+            location.reload()
+        }
+      })
+    
 }
 
 function eliminarInquilino(id){
